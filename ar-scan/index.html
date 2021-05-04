@@ -14,9 +14,20 @@
         <a-assets>
             <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/CesiumMan.gltf"></a-asset-item>
         </a-assets>
+        <a-assets>
+            <a-asset-item id="animatedCar" src="https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/ToyCar/glTF/ToyCar.gltf"></a-asset-item>
+        </a-assets>
 
-        <a-marker type='barcode' value='7'>
+        <!-- <a-marker type='barcode' value='7'>
             <a-box position='0 0.5 0' color="yellow"></a-box>
+        </a-marker> -->
+
+        <a-marker id="animated-caaar" type='barcode' value='7'>
+            <a-entity
+                animation-mixer
+                gltf-model="#animatedCar"
+                scale="2 2 2">
+            </a-entity>
         </a-marker>
 
         <a-marker id="animated-marker" type='barcode' value='6'>
