@@ -34,10 +34,17 @@
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
         <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
 
-        <!-- <a-assets>
-            <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/ar_treasure_chest_0505a.gltf"></a-asset-item>
+        <a-assets>
+            <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0505a.gltf"></a-asset-item>
         </a-assets>
-        <a-obj-model src="#animated-asset"></a-obj-model> -->
+        <a-obj-model src="#animated-asset"></a-obj-model>
+        <a-marker type='barcode' value='7'>
+            <a-entity
+                animation-mixer
+                gltf-model="#animated-asset"
+                scale="2 2 2">
+            </a-entity>        
+        </a-marker>
 
 
         <!-- <a-assets>
