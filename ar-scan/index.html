@@ -60,7 +60,7 @@
         </a-entity>
         </a-marker>
 
-        <!-- Animated treasure chest     -->
+        <!-- Fake animated treasure chest     -->
         <a-assets>
             <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513a.gltf"></a-asset-item>
         </a-assets>
@@ -70,6 +70,20 @@
                 gltf-model="#treasureA"
                 scale="0.085 0.085 0.085"
                 rotation="180 180 180" position="1 1 2" animation="property: rotation; to: 0 360 360; loop: true; dur: 3000">
+            </a-entity>        
+        </a-marker>
+
+        <!-- Real animated treasure chest     -->
+        <a-assets>
+            <a-asset-item id="treasureB" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
+        </a-assets>
+        <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
+        <a-marker type='barcode' value='8'>
+            <a-entity
+            animated-
+                gltf-model="#treasureB"
+                scale="0.085 0.085 0.085"
+                rotation="0 90 180" position="3 1 2\6" animation="property: rotation; to: 0 360 90; loop: true; dur: 6000">
             </a-entity>        
         </a-marker>
 
