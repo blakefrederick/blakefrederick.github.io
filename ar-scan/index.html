@@ -14,6 +14,11 @@
             .addEventListener("click", function () {
              document.getElementById('sphere').setAttribute('color', getRandomColor())
             });
+        document
+            .querySelector(".say-hi-button")
+            .addEventListener("click", function () {
+             document.getElementById('treasure').object3D.scale.multiplyScalar(1.2);
+            });
         };
       
       function getRandomColor() {
@@ -35,12 +40,13 @@
         <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
 
         <a-assets>
-            <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513a.gltf"></a-asset-item>
+            <a-asset-item id="treasure" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513a.gltf"></a-asset-item>
         </a-assets>
         <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
         <a-marker type='barcode' value='7'>
             <a-entity
-                gltf-model="#animated-asset">
+                gltf-model="#treasure"
+                scale="2 2 2">
             </a-entity>        
         </a-marker>
 
