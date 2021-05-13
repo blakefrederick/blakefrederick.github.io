@@ -39,6 +39,8 @@
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
         <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
 
+
+        <!-- Non animated treasure chest     -->
         <a-assets>
             <a-asset-item id="treasure" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513a.gltf"></a-asset-item>
         </a-assets>
@@ -51,27 +53,25 @@
             </a-entity>        
         </a-marker>
 
-
-        <!-- <a-assets>
-            <a-asset-item id="animatedCar" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/ToyCar/ToyCar.gltf"></a-asset-item>
-        </a-assets> -->
-
+        <!-- Sphere -->
         <a-marker type='barcode' value='6'>
             <a-entity rotation="0 0 0" animation="property: position; to: 1 8 -5; dur: 2000; easing: linear; loop: true></a-entity>
             <a-sphere id="sphere"  position="3 1 1" color="red"></a-sphere>
         </a-entity>
         </a-marker>
 
-        <!-- Non-animated Chest -->
-        <!-- <a-assets>
-            <a-asset-item id="chest" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/chest.obj"></a-asset-item>
-        </a-assets> 
-        <a-marker type='barcode' value='7'>
+        <!-- Animated treasure chest     -->
+        <a-assets>
+            <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513a.gltf"></a-asset-item>
+        </a-assets>
+        <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
+        <a-marker type='barcode' value='8'>
             <a-entity
-                obj-model="obj: #chest"
-                >
+                gltf-model="#treasureA"
+                scale="0.005 0.005 0.005"
+                rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 1000">
             </a-entity>        
-        </a-marker> -->
+        </a-marker>
 
         <!-- Radio -->
         <!-- <a-assets>
