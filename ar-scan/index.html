@@ -49,14 +49,14 @@
             <a-entity
                 gltf-model="#treasure"
                 scale="0.075 0.075 0.075"
-                rotation="0 0 180" position="5 5 -2" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+                rotation="0 0 180" position="7 7 3" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
             </a-entity>        
         </a-marker>
 
         <!-- Sphere -->
         <a-marker type='barcode' value='6'>
-            <a-entity rotation="0 0 0" animation="property: position; to: 6 1 0; dur: 2000; easing: linear; loop: true"></a-entity>
-            <a-sphere id="sphere"  position="3 0 0" color="red"></a-sphere>
+            <a-entity rotation="0 0 0" animation="property: position; to: 4 2 1; dur: 20000; easing: linear; loop: true"></a-entity>
+            <a-sphere id="sphere"  position="2 1 0" color="red"></a-sphere>
         </a-entity>
         </a-marker>
 
@@ -65,7 +65,7 @@
             <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513a.gltf"></a-asset-item>
         </a-assets>
         <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
-        <a-marker type='barcode' value='8'>
+        <a-marker type='barcode' value='10'>
             <a-entity
                 gltf-model="#treasureA"
                 scale="0.085 0.085 0.085"
@@ -78,7 +78,7 @@
             <a-asset-item id="treasureB" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         </a-assets>
         <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
-        <a-marker type='barcode' value='10'>
+        <a-marker type='barcode' value='8'>
             <a-entity
             animated-
                 gltf-model="#treasureB"
