@@ -62,14 +62,15 @@
 
         <!-- Fake animated treasure chest     -->
         <a-assets>
-            <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513a.gltf"></a-asset-item>
+            <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         </a-assets>
         <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
         <a-marker type='barcode' value='10'>
             <a-entity
                 gltf-model="#treasureA"
+                animation-mixer
                 scale="0.085 0.085 0.085"
-                rotation="180 180 180" position="1 1 2" animation="property: rotation; to: 0 360 360; loop: true; dur: 3000">
+                rotation="180 180 180" position="0.2 0.2 0.5" animation="property: rotation; to: 360 0 0; loop: true; dur: 3000">
             </a-entity>        
         </a-marker>
 
@@ -121,7 +122,7 @@
             <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
           </a-scene> -->
 
-        <a-entity camera></a-entity>
+        <a-entity camera look-controls cursor="rayOrigin: mouse"></a-entity>
         </a-scene>
     </body>
           <style>
