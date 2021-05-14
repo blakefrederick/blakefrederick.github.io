@@ -75,11 +75,13 @@
         </a-assets>
         <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
         <a-marker type='barcode' value='10'>
-            <a-entity cursor-animator
+            <a-entity
+            
                 gltf-model="#treasureA"
-                animation-mixer
-                scale="0.085 0.085 0.085"
-                rotation="180 180 180" position="0.2 0.2 0.5" animation="property: rotation; to: 360 0 0; loop: true; dur: 3000">
+
+                scale="0.0065 0.0065 0.0065"
+                rotation="0 90 0" position="0.1 0.1 0.1" >
+
                 <a-animation begin="click" attribute="position" from="-20 0 -5" to="-20 0 -25" dur="10000"></a-animation>
                 <a-animation begin="click" attribute="position" from="-20 0 -25" to="-20 1000 -200" delay="9000" dur="9000"></a-animation>
             </a-entity>        
@@ -133,7 +135,7 @@
             <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
           </a-scene> -->
 
-        <a-entity camera></a-entity>
+        <a-entity camera cursor="rayOrigin: mouse"></a-entity>
         </a-scene>
     </body>
           <style>
