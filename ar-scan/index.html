@@ -73,7 +73,7 @@ Colors.random = function() {
         document
             .querySelector(".say-hi-button")
             .addEventListener("click", function () {
-             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: '*', loop: 'repeat'});
+             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: '*', loop: 'once'});
             });
         };
       
@@ -121,8 +121,8 @@ Colors.random = function() {
 
         <!-- Sphere  SHARED -->
         <a-marker type='barcode' value='6'>
-            <a-entity rotation="0 0 0" animation="property: position; to: 0.04 0.02 0.01; dur: 2000; easing: linear; loop: true"></a-entity>
-            <a-sphere id="sphere"  position="-5 -5 -5" color="red"></a-sphere>
+            <a-entity rotation="0 0 0" animation="property: rotation; to: 4.04 0.02 0.01; dur: 2000; easing: linear; loop: true"></a-entity>
+            <a-sphere id="sphere"  position="0 0 0" color="red"></a-sphere>
         </a-entity>
         </a-marker>
 
@@ -134,11 +134,11 @@ Colors.random = function() {
         <a-marker type='barcode' value='10'>
             <a-entity
                 id="treasureAEntity"
-                animation-mixer="clip: *; loop: once;"
+                animation-mixer
                 cycle-count
                 gltf-model="#treasureA"
                 scale="0.0055 0.0055 0.0055"
-                rotation="0 90 0" position="-0.01 -0.01 -0.01" >
+                rotation="0 90 0" position="0 0 0" >
                 
             </a-entity>        
         </a-marker>
