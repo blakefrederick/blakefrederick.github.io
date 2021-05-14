@@ -65,6 +65,7 @@ Colors.random = function() {
     return result;
 };
         window.onload = function () {
+            document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: 'animation0', loop: 'none'});
           document
             .querySelector(".say-hi-button")
             .addEventListener("click", function () {
@@ -137,8 +138,6 @@ Colors.random = function() {
 
                 gltf-model="#treasureA"
                 scale="0.0055 0.0055 0.0055"
-                position="3 1 3" 
-                rotation="0 90 0"
                  >
                 
             </a-entity>        
