@@ -106,22 +106,21 @@ Colors.random = function() {
 
 
         <!-- Non animated treasure chest     -->
-        <a-assets>
+        <!-- <a-assets>
             <a-asset-item id="treasure" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513a.gltf"></a-asset-item>
         </a-assets>
-        <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
         <a-marker type='barcode' value='7'>
             <a-entity
                 animation-mixer
                 gltf-model="#treasure"
-                scale="0.075 0.075 0.075"
-                rotation="0 0 180" position="0.1 0.1 0.1" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+                scale="0.055 0.055 0.075"
+                rotation="0 0 180" position="0.01 0.01 0.01" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
             </a-entity>        
-        </a-marker>
+        </a-marker> -->
 
-        <!-- Sphere -->
+        <!-- Sphere  SHARED -->
         <a-marker type='barcode' value='6'>
-            <a-entity rotation="0 0 0" animation="property: position; to: 4 2 1; dur: 20000; easing: linear; loop: true"></a-entity>
+            <a-entity rotation="0 0 0" animation="property: position; to: 0.04 0.02 0.01; dur: 2000; easing: linear; loop: true"></a-entity>
             <a-sphere id="sphere"  position="0 0 0" color="red"></a-sphere>
         </a-entity>
         </a-marker>
@@ -133,18 +132,15 @@ Colors.random = function() {
         <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
         <a-marker type='barcode' value='10'>
             <a-entity
-            
                 gltf-model="#treasureA"
-
-                scale="0.0065 0.0065 0.0065"
-                rotation="0 90 0" position="0.1 0.1 0.1" >
-
+                scale="0.0055 0.0055 0.0055"
+                rotation="0 90 0" position="0.01 0.01 0.01" >
                 <a-animation begin="click" attribute="position" from="-20 0 -5" to="-20 0 -25" dur="10000"></a-animation>
                 <a-animation begin="click" attribute="position" from="-20 0 -25" to="-20 1000 -200" delay="9000" dur="9000"></a-animation>
             </a-entity>        
         </a-marker>
 
-        <!-- Real animated treasure chest     -->
+        <!-- Real animated treasure chest  SHARED   -->
         <a-assets>
             <a-asset-item id="treasureB" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         </a-assets>
