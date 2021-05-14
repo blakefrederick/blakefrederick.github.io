@@ -65,16 +65,19 @@ Colors.random = function() {
     return result;
 };
         window.onload = function () {
-            document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: 'animation0', loop: 'none'});
           document
             .querySelector(".say-hi-button")
             .addEventListener("click", function () {
              document.getElementById('sphere').setAttribute('color', Colors.random())
             });
         document
-            .querySelector(".say-hi-button")
+            .querySelector(".start")
             .addEventListener("click", function () {
              document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: 'animation0', loop: 'repeat'});
+            });
+            .querySelector(".stop")
+            .addEventListener("click", function () {
+             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: 'animation0', loop: 'none'});
             });
         };
       
@@ -102,6 +105,8 @@ Colors.random = function() {
 
         <div class="buttons" style="text-align: center; margin-top: 5%;">
             <button class="say-hi-button" style="width:200px; padding: 0.5em; height: 50px; font-size: 18px; font-weight:bold; border: 2px solid black; background: white;">Change Color</button>
+            <button class="start" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid green; background: white;">Start</button>
+            <button class="stop" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid red; background: white;">Stop</button>
           </div>
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
         <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
@@ -137,6 +142,7 @@ Colors.random = function() {
             animated-
                 gltf-model="#treasureA"
                 scale="0.0055 0.0055 0.0055"
+                rotation="0 90 0"
                 id="treasureAEntity"
                  >
                 
