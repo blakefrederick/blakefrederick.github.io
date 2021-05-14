@@ -73,7 +73,7 @@ Colors.random = function() {
         document
             .querySelector(".say-hi-button")
             .addEventListener("click", function () {
-             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: '*', loop: 'repeat'});
+             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: 'animation0', loop: 'repeat'});
             });
         };
       
@@ -134,7 +134,7 @@ Colors.random = function() {
         <a-marker type='barcode' value='10'>
             <a-entity
                 id="treasureAEntity"
-                animation-mixer
+
                 gltf-model="#treasureA"
                 scale="0.0055 0.0055 0.0055"
                 position="3 1 3" 
