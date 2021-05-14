@@ -8,16 +8,72 @@
     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     
     <script>
+
+Colors = {};
+Colors.names = {
+    aqua: "#00ffff",
+    azure: "#f0ffff",
+    beige: "#f5f5dc",
+    black: "#000000",
+    blue: "#0000ff",
+    brown: "#a52a2a",
+    cyan: "#00ffff",
+    darkblue: "#00008b",
+    darkcyan: "#008b8b",
+    darkgrey: "#a9a9a9",
+    darkgreen: "#006400",
+    darkkhaki: "#bdb76b",
+    darkmagenta: "#8b008b",
+    darkolivegreen: "#556b2f",
+    darkorange: "#ff8c00",
+    darkorchid: "#9932cc",
+    darkred: "#8b0000",
+    darksalmon: "#e9967a",
+    darkviolet: "#9400d3",
+    fuchsia: "#ff00ff",
+    gold: "#ffd700",
+    green: "#008000",
+    indigo: "#4b0082",
+    khaki: "#f0e68c",
+    lightblue: "#add8e6",
+    lightcyan: "#e0ffff",
+    lightgreen: "#90ee90",
+    lightgrey: "#d3d3d3",
+    lightpink: "#ffb6c1",
+    lightyellow: "#ffffe0",
+    lime: "#00ff00",
+    magenta: "#ff00ff",
+    maroon: "#800000",
+    navy: "#000080",
+    olive: "#808000",
+    orange: "#ffa500",
+    pink: "#ffc0cb",
+    purple: "#800080",
+    violet: "#800080",
+    red: "#ff0000",
+    silver: "#c0c0c0",
+    white: "#ffffff",
+    yellow: "#ffff00"
+};
+
+Colors.random = function() {
+    var result;
+    var count = 0;
+    for (var prop in this.names)
+        if (Math.random() < 1/++count)
+           result = prop;
+    return result;
+};
         window.onload = function () {
           document
             .querySelector(".say-hi-button")
             .addEventListener("click", function () {
-             document.getElementById('sphere').setAttribute('color', getRandomColor())
+             document.getElementById('sphere').setAttribute('color', Colors.random())
             });
         document
             .querySelector(".say-hi-button")
             .addEventListener("click", function () {
-             document.getElementById('treasure').setAttribute('scale', {x: 0.01, y: 0.01, z: 0.01});
+             document.getElementById('treasureA').setAttribute("animation-mixer")
             });
         };
       
@@ -56,16 +112,17 @@
         <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
         <a-marker type='barcode' value='7'>
             <a-entity
+                animation-mixer
                 gltf-model="#treasure"
                 scale="0.075 0.075 0.075"
-                rotation="0 0 180" position="7 7 3" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+                rotation="0 0 180" position="0.1 0.1 0.1" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
             </a-entity>        
         </a-marker>
 
         <!-- Sphere -->
         <a-marker type='barcode' value='6'>
             <a-entity rotation="0 0 0" animation="property: position; to: 4 2 1; dur: 20000; easing: linear; loop: true"></a-entity>
-            <a-sphere id="sphere"  position="2 1 0" color="red"></a-sphere>
+            <a-sphere id="sphere"  position="0 0 0" color="red"></a-sphere>
         </a-entity>
         </a-marker>
 
