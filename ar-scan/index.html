@@ -29,6 +29,15 @@
         }
         return color;
       }
+
+
+      AFRAME.registerComponent('cursor-animator', {
+      init: function () {
+        this.el.addEventListener('click', function (evt) {
+          console.log('click')
+        });
+      }
+    });
       </script>
 
     <body style='margin : 0px; overflow: hidden;'>
