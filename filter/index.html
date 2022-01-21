@@ -102,9 +102,51 @@ Colors.random = function() {
       </script>
 
 <style>
+img {
+  display: block;
+  max-width: 100vw;
+  max-height: 100vh;
+}
 
+img.animated {
+  animation: filter-animation 5s infinite;
+}
+
+body.animated {
+  animation: filter-animation2 3s infinite;
+}
+
+@keyframes filter-animation {
+  0% {
+    filter: sepia(0) saturate(2);
+  }
+
+  50% {
+    filter: sepia(1) saturate(8);
+  }
+
+  100% {
+    filter: sepia(0) saturate(2);
+  }
+}
+@keyframes filter-animation2 {
+  0% {
+    filter: sepia(1) saturate(8);
+  }
+
+  50% {
+    filter: sepia(0) saturate(2);
+  }
+
+  100% {
+    filter: sepia(1) saturate(8);
+  }
+}
 </style>
-    <body style='margin : 0px; overflow: hidden; filter: saturate(400%);'>
+    <body class="animated" style='margin : 0px; overflow: hidden;'>
+
+
+                <img class="animated" src="https://sourpatchkids.com/media/catalog/product/cache/f6ae6ee50ff4c0d57f4379af9f8ebf40/5/0/5006114c-319x319_5.png" style="position:absolute;left:100px;top:400px;">
 
         <div class="buttons" style="text-align: center; margin-top: 5%;">
             <!-- Action buttons 
