@@ -1,0 +1,226 @@
+<!doctype HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    </head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    
+    <script>
+
+Colors = {};
+Colors.names = {
+    aqua: "#00ffff",
+    azure: "#f0ffff",
+    beige: "#f5f5dc",
+    black: "#000000",
+    blue: "#0000ff",
+    brown: "#a52a2a",
+    cyan: "#00ffff",
+    darkblue: "#00008b",
+    darkcyan: "#008b8b",
+    darkgrey: "#a9a9a9",
+    darkgreen: "#006400",
+    darkkhaki: "#bdb76b",
+    darkmagenta: "#8b008b",
+    darkolivegreen: "#556b2f",
+    darkorange: "#ff8c00",
+    darkorchid: "#9932cc",
+    darkred: "#8b0000",
+    darksalmon: "#e9967a",
+    darkviolet: "#9400d3",
+    fuchsia: "#ff00ff",
+    gold: "#ffd700",
+    green: "#008000",
+    indigo: "#4b0082",
+    khaki: "#f0e68c",
+    lightblue: "#add8e6",
+    lightcyan: "#e0ffff",
+    lightgreen: "#90ee90",
+    lightgrey: "#d3d3d3",
+    lightpink: "#ffb6c1",
+    lightyellow: "#ffffe0",
+    lime: "#00ff00",
+    magenta: "#ff00ff",
+    maroon: "#800000",
+    navy: "#000080",
+    olive: "#808000",
+    orange: "#ffa500",
+    pink: "#ffc0cb",
+    purple: "#800080",
+    violet: "#800080",
+    red: "#ff0000",
+    silver: "#c0c0c0",
+    white: "#ffffff",
+    yellow: "#ffff00"
+};
+
+Colors.random = function() {
+    var result;
+    var count = 0;
+    for (var prop in this.names)
+        if (Math.random() < 1/++count)
+           result = prop;
+    return result;
+};
+        window.onload = function () {
+          document
+            .querySelector(".say-hi-button")
+            .addEventListener("click", function () {
+             document.getElementById('sphere').setAttribute('color', Colors.random())
+            });
+        document
+            .querySelector(".start")
+            .addEventListener("click", function () {
+             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: 'animation0', loop: 'repeat'});
+            });
+            .querySelector(".stop")
+            .addEventListener("click", function () {
+             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: 'animation0', loop: 'none'});
+            });
+        };
+      
+      function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+
+      AFRAME.registerComponent('cycle-count', {
+  init: function() {
+      this.el.addEventListener('animation-loop', e => {
+          // cycle finished - do whatever you need
+          
+      })
+  }
+});
+      </script>
+
+<style>
+
+</style>
+    <body style='margin : 0px; overflow: hidden; filter: saturate(400%);'>
+
+        <div class="buttons" style="text-align: center; margin-top: 5%;">
+            <!-- Action buttons 
+            <button class="say-hi-button" style="width:200px; padding: 0.5em; height: 50px; font-size: 18px; font-weight:bold; border: 2px solid black; background: white;">Change Color</button>
+            <button class="start" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid green; background: white;">Start</button>
+            <button class="stop" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid red; background: white;">Stop</button>
+            -->
+        </div>
+
+          <!-- location based testing -->
+          <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+            <!-- ck langley -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 0 5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.16275788178612; latitude: -122.63911809729908;" animation-mixer/> 
+            <!-- m dw -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 0 5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.162526; latitude: -122.609065;" animation-mixer/> 
+            <!-- m lr -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 0 5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.162451; latitude: -122.609349;" animation-mixer/> 
+            <!-- b -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 0 5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.26267967021366; latitude: -123.03669577077862;" animation-mixer/> 
+            <!-- bus stop -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 0 5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.26198814493848; latitude: -123.03712070791485;" animation-mixer/> 
+        </a-scene>
+
+        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
+        <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+
+
+        <!-- Non animated treasure chest     -->
+        <!-- <a-assets>
+            <a-asset-item id="treasure" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513a.gltf"></a-asset-item>
+        </a-assets>
+        <a-marker type='barcode' value='7'>
+            <a-entity
+                animation-mixer
+                gltf-model="#treasure"
+                scale="0.055 0.055 0.075"
+                rotation="0 0 180" position="0.01 0.01 0.01" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+            </a-entity>        
+        </a-marker> -->
+
+        <!-- Sphere  SHARED -->
+        <a-marker type='barcode' value='6'>
+            <a-entity rotation="0 0 0" animation="property: rotation; to: 4.04 0.02 0.01; dur: 2000; easing: linear; loop: true"></a-entity>
+            <a-sphere id="sphere"  position="0 0 0" color="red"></a-sphere>
+        </a-entity>
+        </a-marker>
+
+        <!-- TESTING Real animated treasure chest     -->
+        <a-assets>
+            <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
+        </a-assets>
+        <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
+        <a-marker type='barcode' value='11'>
+            <a-entity
+            animated-
+                gltf-model="#treasureA"
+                scale="0.0055 0.0055 0.0055"
+                rotation="0 90 0"
+                id="treasureAEntity"
+                 >
+                
+            </a-entity>        
+        </a-marker>
+
+        <!-- Real animated treasure chest  SHARED   -->
+        <a-assets>
+            <a-asset-item id="treasureB" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
+        </a-assets>
+        <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
+        <a-marker type='barcode' value='8'>
+            <a-entity
+            animated-
+                gltf-model="#treasureB"
+                animation-mixer
+                scale="0.0045 0.0045 0.0045"
+                rotation="0 90 0" position="0.2 0.3 0.1" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000">
+            </a-entity>        
+        </a-marker>
+
+        <!-- Radio -->
+        <!-- <a-assets>
+            <a-asset-item id="radio" src="https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/BoomBox/glTF/BoomBox.gltf"></a-asset-item>
+        </a-assets> 
+        <a-marker type='barcode' value='7'>
+            <a-entity
+                animation-mixer
+                gltf-model="#radio"
+                scale="2 2 2">
+            </a-entity>        
+        </a-marker>
+
+        
+        <a-assets>
+            <a-asset-item id="camera" src="https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/AntiqueCamera/glTF/AntiqueCamera.gltf"></a-asset-item>
+        </a-assets>
+        <a-marker id="camera" type='barcode' value='6'>
+            <a-entity
+                animation-mixer
+                gltf-model="#camera"
+                scale="2 2 2">
+            </a-entity>
+        </a-marker> -->
+
+        <!-- <a-scene>
+            <a-assets>
+              <a-asset-item id="tree-obj" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/treasure/Chest.obj"></a-asset-item>
+              <a-asset-item id="tree-mtl" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/treasure/Chest.mtl"></a-asset-item>
+            </a-assets>
+          
+            <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
+          </a-scene> -->
+
+        <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+          <style>
+
+</html>
