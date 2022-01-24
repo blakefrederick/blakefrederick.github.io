@@ -129,17 +129,19 @@ Colors.random = function() {
             </a-entity>        
         </a-marker> -->
 
-        <!-- Sphere - Click with HIRO marker -->
+        <!-- Sphere - Click with HIRO marker 
         <a-marker type='barcode' value='6'>
             <a-entity rotation="0 0 0" animation="property: rotation; to: 4.04 0.02 0.01; dur: 2000; easing: linear; loop: true">
                 <a-sphere id="sphere"  position="0 0 0" color="red"></a-sphere>
             </a-entity>
         </a-marker>
+-->
 
-        <!-- Sphere - Click -->
+        <!-- Sphere - Click
         <a-entity rotation="0 0 0" animation="property: rotation; to: 3.04 0.02 0.01; dur: 3000; easing: linear; loop: true">
             <a-sphere id="sphere"  position="0 1 0" color="red"></a-sphere>
         </a-entity>
+ -->
 
         <!-- Animated treasure chest with HIRO marker 
         <a-assets>
@@ -158,7 +160,7 @@ Colors.random = function() {
         </a-marker>
         -->
 
-        <!-- Animated treasure chest with custom CK HIRO marker -->
+        <!-- Animated treasure chest with custom CK HIRO marker 
         <a-assets>
             <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         </a-assets>
@@ -172,16 +174,22 @@ Colors.random = function() {
                  >
             </a-entity>        
         </a-marker>
-
+    -->
+        
+        <!-- Animated SPHERE with custom CK HIRO marker -->
+        <a-marker type='pattern' value='ck-logo-marker.patt'>
+            <a-entity rotation="0 0 0" animation="property: rotation; to: 4.04 0.02 0.01; dur: 2000; easing: linear; loop: true">
+                <a-sphere id="sphere"  position="0 0 0" color="red"></a-sphere>
+            </a-entity>
+        </a-marker>
 
         <!-- Animated treasure chest -->
         <!-- <a-entity animated-gltf-model="#treasureA" scale="0.0045 0.0045 0.0045" rotation="0 70 30" id="treasureAEntity"></a-entity>    -->
 
-        <!-- Real animated treasure chest  SHARED   -->
+        <!-- Real animated treasure chest  SHARED  
         <a-assets>
             <a-asset-item id="treasureB" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         </a-assets>
-        <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
         <a-marker type='barcode' value='8'>
             <a-entity
             animated-
@@ -191,6 +199,7 @@ Colors.random = function() {
                 rotation="0 90 0" position="0.2 0.3 0.1" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000">
             </a-entity>        
         </a-marker>
+    -->
 
         <!-- Radio -->
         <!-- <a-assets>
