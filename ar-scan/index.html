@@ -154,11 +154,10 @@ Colors.random = function() {
             <a-sphere id="sphere"  position="0 1 0" color="red"></a-sphere>
         </a-entity>
 
-        <!-- Animated treasure chest with HIRO marker -->
+        <!-- Animated treasure chest with HIRO marker 
         <a-assets>
             <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         </a-assets>
-        <!-- <a-obj-model src="#animated-asset"></a-obj-model> -->
         <a-marker type='barcode' value='11'>
             <a-entity
             animated-
@@ -170,9 +169,26 @@ Colors.random = function() {
                 
             </a-entity>        
         </a-marker>
+        -->
+
+        <!-- Animated treasure chest with custom CK HIRO marker -->
+        <a-assets>
+            <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
+        </a-assets>
+        <a-marker type='pattern' value='ck-logo-marker.patt'>
+            <a-entity
+            animated-
+                gltf-model="#treasureA"
+                scale="0.0055 0.0055 0.0055"
+                rotation="0 90 0"
+                id="treasureAEntity"
+                 >
+            </a-entity>        
+        </a-marker>
+
 
         <!-- Animated treasure chest -->
-        <a-entity animated-gltf-model="#treasureA" scale="0.0045 0.0045 0.0045" rotation="0 70 30" id="treasureAEntity"></a-entity>   
+        <!-- <a-entity animated-gltf-model="#treasureA" scale="0.0045 0.0045 0.0045" rotation="0 70 30" id="treasureAEntity"></a-entity>    -->
 
         <!-- Real animated treasure chest  SHARED   -->
         <a-assets>
