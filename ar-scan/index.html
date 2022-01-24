@@ -183,6 +183,13 @@ Colors.random = function() {
             </a-entity>
         </a-marker>
 
+        <!-- Animated SPHERE with barcode marker -->
+        <a-marker type='barcode' value='6'>
+            <a-entity rotation="0 0 0" animation="property: rotation; to: 4.04 0.02 0.01; dur: 2000; easing: linear; loop: true">
+                <a-sphere id="sphere"  position="0 0 0" color="red"></a-sphere>
+            </a-entity>
+        </a-marker>
+
         <!-- Animated treasure chest -->
         <!-- <a-entity animated-gltf-model="#treasureA" scale="0.0045 0.0045 0.0045" rotation="0 70 30" id="treasureAEntity"></a-entity>    -->
 
