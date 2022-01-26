@@ -73,12 +73,12 @@ Colors.random = function() {
           document
             .querySelector(".start")
             .addEventListener("click", function () {
-             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: 'animation0', loop: 'repeat'});
+             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {loop: 'pingpong'});
             });
           document
             .querySelector(".stop")
             .addEventListener("click", function () {
-             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {clip: 'animation0', loop: 'none'});
+             document.getElementById('treasureAEntity').removeAttribute('animation-mixer');
             });
         };
       
@@ -105,10 +105,9 @@ Colors.random = function() {
     <body style='margin : 0px; overflow: hidden;'>
 
         <div class="buttons" style="text-align: center; margin-top: 5%;">
-            <button class="say-hi-button" style="width:200px; padding: 0.5em; height: 50px; font-size: 18px; font-weight:bold; border: 2px solid black; background: white;">Change Color</button>
-            <button class="start" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid green; background: white;">Start</button>
+            <button class="say-hi-button" style="display: none; width:200px; padding: 0.5em; height: 50px; font-size: 18px; font-weight:bold; border: 2px solid black; background: white;">Change Color</button>
+            <button class="start" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid green; background: white;">Open Chest</button>
             <button class="stop" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid red; background: white;">Stop</button>
-            
         </div>
 
 
@@ -146,12 +145,12 @@ Colors.random = function() {
         </a-marker> 
         -->
 
-        <!-- Animated Treasure - NOT working 01/25/22
+        <!-- Animated Treasure - Working 01/25/22           
         <a-assets>
             <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         </a-assets>
-        <a-entity animated-gltf-model="#treasureA" position="0.01 0.01 0.01" scale="0.055 0.055 0.075" rotation="0 0 0" id="treasureAEntity"></a-entity>   
-        -->   
+        <a-entity gltf-model="#treasureA" position="0.01 1.01 -5.01" scale="0.0025 0.0025 0.0025" rotation="-20 120 20" id="treasureAEntity"></a-entity>   
+        -->    
 
         <!-- Animated Treasure - Animated with marker. Working 01/25/22
         <a-assets>
@@ -162,51 +161,26 @@ Colors.random = function() {
         </a-marker>
         -->
 
-        <!-- Animated Treasure - Animated with custom CK marker. ??? 01/25/22         -->
+        <!-- Animated Treasure - Animated with custom CK marker. NOT Working 01/25/22
         <a-assets>
             <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         </a-assets>
-        <!-- Note that this is a-marker-camera -->
         <a-marker type='pattern' patternUrl='ar-marker-unila.patt'>
             <a-entity animation-mixer gltf-model="#treasureA"  position="0.01 0.01 0.01" scale="0.0035 0.0035 0.0035" rotation="0 90 0" id="treasureAEntity"></a-entity>        
         </a-marker>
+        -->
 
-
-
-        
-        <!-- Animated SPHERE with custom CK HIRO marker 
-        <a-marker type='pattern' value='ck-logo-marker.patt'>
-            <a-entity rotation="0 0 0" animation="property: rotation; to: 4.04 0.02 0.01; dur: 2000; easing: linear; loop: true">
-                <a-sphere id="sphere"  position="0 0 0" color="red"></a-sphere>
-            </a-entity>
-        </a-marker>
-    -->
-
-        <!-- Animated SPHERE with barcode marker. Working 01/25/22 
-        <a-marker type='barcode' value='6'>
-            <a-entity rotation="0 0 0" animation="property: rotation; to: 4.04 0.02 1.01; dur: 2000; easing: linear; loop: true" scale="2.1 2.1 2.1">
-                <a-sphere id="sphere"  position="0 0 0" color="red"></a-sphere>
-            </a-entity>
-        </a-marker>
-    -->
-
-        <!-- Real animated treasure chest  SHARED  
+        <!-- Sour Patch Kid - ??? 01/25/22              -->  
         <a-assets>
-            <a-asset-item id="treasureB" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
+            <a-asset-item id="sourPatch" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb"></a-asset-item>
         </a-assets>
-        <a-marker type='barcode' value='8'>
-            <a-entity
-            animated-
-                gltf-model="#treasureB"
-                animation-mixer
-                scale="0.0045 0.0045 0.0045"
-                rotation="0 90 0" position="0.2 0.3 0.1" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000">
-            </a-entity>        
-        </a-marker>
-    -->
+        <a-entity gltf-model="#sourPatch" position="0.01 1.01 0.01" scale="1.0025 1.0025 1.0025" rotation="-20 120 20" id="sourPatchEntity"></a-entity>   
+
+
 
         <!-- Radio -->
-        <!-- <a-assets>
+        <!--
+        <a-assets>
             <a-asset-item id="radio" src="https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/BoomBox/glTF/BoomBox.gltf"></a-asset-item>
         </a-assets> 
         <a-marker type='barcode' value='7'>
@@ -227,7 +201,8 @@ Colors.random = function() {
                 gltf-model="#camera"
                 scale="2 2 2">
             </a-entity>
-        </a-marker> -->
+        </a-marker>
+    -->
 
         <!-- <a-scene>
             <a-assets>
