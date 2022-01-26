@@ -80,6 +80,12 @@ Colors.random = function() {
             .addEventListener("click", function () {
              document.getElementById('treasureAEntity').removeAttribute('animation-mixer');
             });
+          document
+            .querySelector(".sourPatch")
+            .addEventListener("click", function () {
+                console.log('clicked sourPatch character')
+                document.getElementById('sourPatchEntity').setAttribute('position',  {x: 2, y: 1, z: -5});
+            });
         };
       
       function getRandomColor() {
@@ -102,11 +108,11 @@ Colors.random = function() {
 });
       </script>
 
-    <body style='margin : 0px; overflow: hidden;'>
+    <body style='margin : 0px; overflow: hidden;' class="sourPatch">
 
         <div class="buttons" style="text-align: center; margin-top: 5%;">
             <button class="say-hi-button" style="display: none; width:200px; padding: 0.5em; height: 50px; font-size: 18px; font-weight:bold; border: 2px solid black; background: white;">Change Color</button>
-            <button class="start" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid green; background: white;">Open Chest</button>
+            <button class="start" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid green; background: white;">Open</button>
             <button class="stop" style="width:100px; padding: 0.25em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid red; background: white;">Stop</button>
         </div>
 
@@ -170,52 +176,12 @@ Colors.random = function() {
         </a-marker>
         -->
 
-        <!-- Sour Patch Kid - ??? 01/25/22              -->  
+        <!-- Sour Patch Kid - Working 01/25/22
         <a-assets>
             <a-asset-item id="sourPatch" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb"></a-asset-item>
         </a-assets>
-        <a-entity gltf-model="#sourPatch" position="0.01 1.01 0.01" scale="1.0025 1.0025 1.0025" rotation="-20 120 20" id="sourPatchEntity"></a-entity>   
-
-
-
-        <!-- Radio -->
-        <!--
-        <a-assets>
-            <a-asset-item id="radio" src="https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/BoomBox/glTF/BoomBox.gltf"></a-asset-item>
-        </a-assets> 
-        <a-marker type='barcode' value='7'>
-            <a-entity
-                animation-mixer
-                gltf-model="#radio"
-                scale="2 2 2">
-            </a-entity>        
-        </a-marker>
-
-        
-        <a-assets>
-            <a-asset-item id="camera" src="https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/AntiqueCamera/glTF/AntiqueCamera.gltf"></a-asset-item>
-        </a-assets>
-        <a-marker id="camera" type='barcode' value='6'>
-            <a-entity
-                animation-mixer
-                gltf-model="#camera"
-                scale="2 2 2">
-            </a-entity>
-        </a-marker>
-    -->
-
-        <!-- <a-scene>
-            <a-assets>
-              <a-asset-item id="tree-obj" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/treasure/Chest.obj"></a-asset-item>
-              <a-asset-item id="tree-mtl" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/treasure/Chest.mtl"></a-asset-item>
-            </a-assets>
-          
-            <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
-          </a-scene> -->
-
-        <!-- <a-entity camera></a-entity> -->
-        <!-- </a-scene> -->
-
+        <a-entity gltf-model="#sourPatch" position="0.01 1.01 -10.01" scale="1.0025 1.0025 1.0025" rotation="0 0 0" id="sourPatchEntity"></a-entity>   
+        -->  
 
         </a-scene>
     </body>
