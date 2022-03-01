@@ -65,26 +65,48 @@ Colors.random = function() {
     return result;
 };
         window.onload = function () {
-          document
-            .querySelector(".say-hi-button")
-            .addEventListener("click", function () {
-             document.getElementById('sphere').setAttribute('color', Colors.random())
-            });
-          document
-            .querySelector(".start")
-            .addEventListener("click", function () {
-             document.getElementById('treasureAEntity').setAttribute('animation-mixer', {loop: 'pingpong'});
-            });
-          document
-            .querySelector(".stop")
-            .addEventListener("click", function () {
-             document.getElementById('treasureAEntity').removeAttribute('animation-mixer');
-            });
+        //   document
+        //     .querySelector(".say-hi-button")
+        //     .addEventListener("click", function () {
+        //      document.getElementById('sphere').setAttribute('color', Colors.random())
+        //     });
+        //   document
+        //     .querySelector(".start")
+        //     .addEventListener("click", function () {
+        //      document.getElementById('sphere').setAttribute('position',  {x: 2, y: 1, z: -5});
+        //      document.getElementById('treasureAEntity').setAttribute('animation-mixer', {loop: 'pingpong'});
+        //     });
+        //   document
+        //     .querySelector(".stop")
+        //     .addEventListener("click", function () {
+        //      document.getElementById('treasureAEntity').removeAttribute('animation-mixer');
+        //     });
           document
             .querySelector(".sourPatch")
             .addEventListener("click", function () {
                 console.log('clicked sourPatch character')
                 document.getElementById('sourPatchEntity').setAttribute('position',  {x: 2, y: 1, z: -5});
+            });
+        document
+            .querySelector(".collect-blue")
+            .addEventListener("click", function () {
+                // document.getElementById('blue-sphere').setAttribute('position',  {x: -3, y: 3, z: -8});
+                document.getElementById('blue-sphere').setAttribute('scale',  {x: 0.5, y: 0.5, z: 0.5});
+                document.getElementById('blue-sphere').setAttribute('animation',  "property: position; to: -3 3 -8; dur: 500; easing: linear; loop: false");
+            });
+        document
+            .querySelector(".collect-purple")
+            .addEventListener("click", function () {
+                // document.getElementById('purple-sphere').setAttribute('position',  {x: -3, y: 1.8, z: -8});
+                document.getElementById('purple-sphere').setAttribute('scale',  {x: 0.5, y: 0.5, z: 0.5});
+                document.getElementById('purple-sphere').setAttribute('animation',  "property: position; to: -3 1.8 -8; dur: 500; easing: linear; loop: false");
+            });
+        document
+            .querySelector(".collect-pink")
+            .addEventListener("click", function () {
+                // document.getElementById('pink-sphere').setAttribute('position',  {x: -3, y: 0.6, z: -8});
+                document.getElementById('pink-sphere').setAttribute('scale',  {x: 0.5, y: 0.5, z: 0.5});
+                document.getElementById('pink-sphere').setAttribute('animation',  "property: position; to: -3 0.6 -8; dur: 500; easing: linear; loop: false");
             });
         };
       
@@ -110,21 +132,37 @@ Colors.random = function() {
 
     <body style='margin : 0px; overflow: hidden;' class="sourPatch">
 
-        <div class="buttons" style="text-align: center; margin-top: 5%;">
+        <div class="buttons" style="text-align: center; margin-top: 5%; z-index:99;">
             <button class="say-hi-button" style="display: none; width:200px; padding: 0.5em; height: 50px; font-size: 18px; font-weight:bold; border: 2px solid black; background: white;">Change Color</button>
-            <button class="start" style="width:100px; padding: 0.35em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid green; background: white;">Bounce</button>
-            <button class="stop" style="width:100px; padding: 0.35em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid red; background: white;">Open</button>
+            <!-- <button class="start" style="width:100px; padding: 0.35em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid green; background: white;">Bounce</button> -->
+            <!-- <button class="stop" style="width:100px; padding: 0.35em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid red; background: white;">Open</button> -->
+            <button class="collect-blue" style="width:200px; padding: 0.35em; height: 30px; font-size: 16px; font-weight:bold; border: 2px solid blue; background: white;">Collect Blue</button>
+            <button class="collect-purple" style="width:200px; padding: 0.35em; height: 30px; font-size: 16px; font-weight:bold; border: 2px solid purple; background: white;">Collect Purple</button>
+            <button class="collect-pink" style="width:200px; padding: 0.35em; height: 30px; font-size: 16px; font-weight:bold; border: 2px solid pink; background: white;">Collect Pink</button>
+
         </div>
 
+        <!-- position: 1: higher number moves object left, max seems to be about 3.
+            position 2: higher number moves object up, max seems to be about 4. 
+            position 3: smaller number means further away from the camera, should be negative otherwise object goes behind camera, -8 works for spheres -->
 
         <!-- GPS location based testing -->
         <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
-                          <!-- Sphere - Animated (approaches camera) with marker. Working 01/25/22         --> 
-                          <a-marker type='pattern' url='pattern-K-grey.patt'>
-                            <a-entity rotation="0 0 0" animation="property: position; to: 0.04 8.02 -1.01; dur: 2000; easing: linear; loop: true">
-                                <a-sphere id="sphere" position="0 1.35 -1" color="red"></a-sphere>
-                            </a-entity>
-                        </a-marker>
+            <a-entity rotation="0 0 0" >
+                <a-sphere id="blue-sphere" position="-3.5 1 -6" animation="property: position; to: 5.25 1.25 -18.75; dur: 22000; easing: linear; loop: true" color="blue"></a-sphere>
+            </a-entity>
+            <a-entity rotation="0 0 0" >
+                <a-sphere id="purple-sphere" position="0 2 -9" animation="property: position; to: -3.75 1.75 -3.75; dur: 30000; easing: linear; loop: true" color="purple"></a-sphere>
+            </a-entity>
+            <a-entity rotation="0 0 0">
+                <a-sphere id="pink-sphere"  position="1 -0.5 -7" animation="property: position; to: 1.5 2.25 -22.75; dur: 20000; easing: linear; loop: false" color="pink"></a-sphere>
+            </a-entity>
+            <!-- Sphere - Animated (approaches camera) with marker. Working 01/25/22         --> 
+            <a-marker type='barcode' value='7'>
+                <a-entity rotation="0 0 0" animation="property: position; to: 0.04 8.02 -1.01; dur: 2000; easing: linear; loop: true">
+                    <a-sphere id="sphere" position="0 0.35 -1" color="red"></a-sphere>
+                </a-entity>
+            </a-marker>
             <a-assets>
                 <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
             </a-assets>
@@ -142,7 +180,7 @@ Colors.random = function() {
         </a-scene>
 
         <!-- Barcode marker based testing --- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
-        <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+        <!-- <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"> -->
 
         <!-- Sphere. Working 01/25/22 -->
         <!-- <a-sphere id="sphere" position="0 1.15 -5" color="red"></a-sphere> -->
@@ -208,6 +246,6 @@ Colors.random = function() {
         <a-entity gltf-model="#sourPatch" position="0.01 1.01 -10.01" scale="1.0025 1.0025 1.0025" rotation="0 0 0" id="sourPatchEntity"></a-entity>   
         -->  
 
-        </a-scene>
+        <!-- </a-scene> -->
     </body>
 </html>
