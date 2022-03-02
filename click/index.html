@@ -1,0 +1,93 @@
+<html>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+<script>
+    const slots = [
+        "-4 3 -8",
+        "-4 1.8 -8", 
+        "-4 0.6 -8",
+        "-4 -0.2 -8",
+        "-4 -1.4 -8"
+    ]
+    const scale = {x: 0.5, y: 0.5, z: 0.5}
+
+    AFRAME.registerComponent("blue-sphere", {
+        init: function() {
+        this.el.addEventListener("click", (e) => {
+            let element = document.querySelector("#blue-sphere")
+            element.setAttribute('scale',  scale);
+            element.setAttribute('animation',  "property: position; to: " + slots.shift() + "; dur: 500; easing: linear; loop: false");
+            element.style.animation = 'party 2.5s infinite linear';
+            
+            element.setAttribute("opacity", "0.8")
+        })
+        }
+    })
+    AFRAME.registerComponent("purple-box", {
+        init: function() {
+        this.el.addEventListener("click", (e) => {
+            let element = document.querySelector("#purple-box")
+            element.setAttribute('scale',  scale);
+            element.setAttribute('animation__position',  "property: position; to: " + slots.shift() + "; dur: 500; easing: linear; loop: false");
+            element.setAttribute('animation__rotation',  "property: rotation; to: 0 0 0; dur: 1000; easing: linear; loop: false");
+            element.style.animation = 'party 2.5s infinite linear';
+            element.setAttribute("opacity", "0.8")
+        })
+        }
+    })
+    AFRAME.registerComponent("cyan-box", {
+        init: function() {
+        this.el.addEventListener("click", (e) => {
+            let element = document.querySelector("#cyan-box")
+            element.setAttribute('scale',  scale);
+            element.setAttribute('animation__position',  "property: position; to: " + slots.shift() + "; dur: 500; easing: linear; loop: false");
+            element.setAttribute('animation__rotation',  "property: rotation; to: 0 0 0; dur: 1000; easing: linear; loop: false");
+            element.style.animation = 'party 2.5s infinite linear';
+            element.setAttribute("opacity", "0.8")
+        })
+        }
+    })
+    AFRAME.registerComponent("yellow-cylinder", {
+        init: function() {
+        this.el.addEventListener("click", (e) => {
+            let element = document.querySelector("#yellow-cylinder")
+            element.setAttribute('scale',  scale);
+            element.setAttribute('animation__position',  "property: position; to: " + slots.shift() + "; dur: 500; easing: linear; loop: false");
+            element.setAttribute('animation__rotation',  "property: rotation; to: 0 0 0; dur: 1000; easing: linear; loop: false");
+            element.style.animation = 'party 2.5s infinite linear';
+            element.setAttribute("opacity", "0.8")
+        })
+        }
+    })
+</script>
+<a-scene cursor="rayOrigin: mouse" embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+    <a-sphere blue-sphere id="blue-sphere" color="blue" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" animation__position="property: position; to: 0.25 0.25 -30.75; dur: 12000; easing: easeInOutElastic; loop: true"></a-sphere>
+    <a-box purple-box id="purple-box" color="purple" position ="0 1 -4" animation__rotation="property: rotation; to: 360 360 360; dur: 5000; easing: linear; loop: true" animation__position="property: position; to: 0.25 6.25 -20.75; dur: 12000; easing: linear; loop: true"></a-box>
+    <a-box cyan-box id="cyan-box" position="-3 0.5 -3" rotation="0 45 0" color="#4CC3D9"  animation__rotation="property: rotation; to: 180 180 360; dur: 20000; easing: linear; loop: true" animation__position="property: position; to: -2.25 4.25 -10.75; dur: 12000; easing: linear; loop: true"></a-box>
+    <a-cylinder yellow-cylinder id="yellow-cylinder" position="1 0.75 -4" radius="0.5" height="1.5" color="#FFC65D" rotation="0 0 0" animation__rotation="property: rotation; to: 360 360 360; dur: 1000; easing: linear; loop: true" animation__position="property: position; to: 10.25 3.25 -20.75; dur: 12000; easing: linear; loop: true"></a-cylinder>
+</a-scene>
+
+<style>
+    a-scene * {
+        opacity: 0.95;
+    }
+@keyframes party{
+    0% {background-color: red;}
+    10% {background-color: orange;}
+    20% {background-color: yellow;}
+    30% {background-color: green;}
+    40% {background-color: blue;}
+    50% {background-color: purple;} 
+}
+
+@-webkit-keyframes party{
+    0% {background-color: red;}
+    10% {background-color: orange;}
+    20% {background-color: yellow;}
+    30% {background-color: green;}
+    40% {background-color: blue;}
+    50% {background-color: purple;} 
+}
+</style>
+</html>
