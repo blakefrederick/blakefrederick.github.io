@@ -7,9 +7,11 @@
 </script>
 <a-scene cursor="rayOrigin: mouse" embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
     <a-assets>
-        <img id="fear1" src="star.png">
+        <img id="fear1" src="fear1.jpeg">
+        <img id="fear2" src="fear2.jpeg">
     </a-assets>
-        <a-image src="#fear1" position="2 2 -10" width="3" height="1.5"></a-image>
+        <a-image src="#fear1" position="1 2 -10" animation__position="property: position; to: -2.25 1 10.75; dur: 9000; easing: linear; loop: false"></a-image>
+        <a-image src="#fear2" position="2 3 -20" animation__position="property: position; to: -1.00 1 10.75; dur: 12000; easing: linear; loop: false"></a-image>
 </a-scene>
 
 <style>
