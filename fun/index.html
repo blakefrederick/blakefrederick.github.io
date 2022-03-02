@@ -1,0 +1,174 @@
+<!doctype HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    </head>
+    <style>
+        button {
+            margin-top: 10px;
+        }
+        </style>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    
+    <script>
+
+
+
+Colors = {};
+Colors.names = {
+    aqua: "#00ffff",
+    azure: "#f0ffff",
+    beige: "#f5f5dc",
+    black: "#000000",
+    blue: "#0000ff",
+    brown: "#a52a2a",
+    cyan: "#00ffff",
+    darkblue: "#00008b",
+    darkcyan: "#008b8b",
+    darkgrey: "#a9a9a9",
+    darkgreen: "#006400",
+    darkkhaki: "#bdb76b",
+    darkmagenta: "#8b008b",
+    darkolivegreen: "#556b2f",
+    darkorange: "#ff8c00",
+    darkorchid: "#9932cc",
+    darkred: "#8b0000",
+    darksalmon: "#e9967a",
+    darkviolet: "#9400d3",
+    fuchsia: "#ff00ff",
+    gold: "#ffd700",
+    green: "#008000",
+    indigo: "#4b0082",
+    khaki: "#f0e68c",
+    lightblue: "#add8e6",
+    lightcyan: "#e0ffff",
+    lightgreen: "#90ee90",
+    lightgrey: "#d3d3d3",
+    lightpink: "#ffb6c1",
+    lightyellow: "#ffffe0",
+    lime: "#00ff00",
+    magenta: "#ff00ff",
+    maroon: "#800000",
+    navy: "#000080",
+    olive: "#808000",
+    orange: "#ffa500",
+    pink: "#ffc0cb",
+    purple: "#800080",
+    violet: "#800080",
+    red: "#ff0000",
+    silver: "#c0c0c0",
+    white: "#ffffff",
+    yellow: "#ffff00"
+};
+
+Colors.random = function() {
+    var result;
+    var count = 0;
+    for (var prop in this.names)
+        if (Math.random() < 1/++count)
+           result = prop;
+    return result;
+};
+        window.onload = function () {
+        //   document
+        //     .querySelector(".say-hi-button")
+        //     .addEventListener("click", function () {
+        //      document.getElementById('sphere').setAttribute('color', Colors.random())
+        //     });
+        //   document
+        //     .querySelector(".start")
+        //     .addEventListener("click", function () {
+        //      document.getElementById('sphere').setAttribute('position',  {x: 2, y: 1, z: -5});
+        //      document.getElementById('treasureAEntity').setAttribute('animation-mixer', {loop: 'pingpong'});
+        //     });
+        //   document
+        //     .querySelector(".stop")
+        //     .addEventListener("click", function () {
+        //      document.getElementById('treasureAEntity').removeAttribute('animation-mixer');
+        //     });
+        document
+            .querySelector("#blue-sphere")
+            .addEventListener("click", function () {
+                // document.getElementById('blue-sphere').setAttribute('position',  {x: -3, y: 3, z: -8});
+                document.getElementById('blue-sphere').setAttribute('scale',  {x: 0.5, y: 0.5, z: 0.5});
+                document.getElementById('blue-sphere').setAttribute('animation',  "property: position; to: -3 3 -8; dur: 500; easing: linear; loop: false");
+            });
+        document
+            .querySelector("#purple-sphere")
+            .addEventListener("click", function () {
+                // document.getElementById('purple-sphere').setAttribute('position',  {x: -3, y: 1.8, z: -8});
+                document.getElementById('purple-sphere').setAttribute('scale',  {x: 0.5, y: 0.5, z: 0.5});
+                document.getElementById('purple-sphere').setAttribute('animation',  "property: position; to: -3 1.8 -8; dur: 500; easing: linear; loop: false");
+            });
+        document
+            .querySelector("#pink-sphere")
+            .addEventListener("click", function () {
+                // document.getElementById('pink-sphere').setAttribute('position',  {x: -3, y: 0.6, z: -8});
+                document.getElementById('pink-sphere').setAttribute('scale',  {x: 0.5, y: 0.5, z: 0.5});
+                document.getElementById('pink-sphere').setAttribute('animation',  "property: position; to: -3 0.6 -8; dur: 500; easing: linear; loop: false");
+            });
+        };
+      
+      function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+
+      AFRAME.registerComponent('cycle-count', {
+  init: function() {
+      this.el.addEventListener('animation-loop', e => {
+          // cycle finished - do whatever you need
+          
+      })
+  }
+});
+      </script>
+
+    <body style='margin : 0px; overflow: hidden;' class="sourPatch">
+
+        <div class="buttons" style="text-align: center; margin-top: 5%; z-index:99; max-width: 400px; margin: 5% auto;">
+            <button class="say-hi-button" style="display: none; width:200px; padding: 0.5em; height: 50px; font-size: 18px; font-weight:bold; border: 2px solid black; background: white;">Change Color</button>
+            <!-- <button class="start" style="width:100px; padding: 0.35em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid green; background: white;">Bounce</button> -->
+            <!-- <button class="stop" style="width:100px; padding: 0.35em; height: 30px; font-size: 12px; font-weight:bold; border: 2px solid red; background: white;">Open</button> -->
+            <!-- <button class="collect-blue" style="width:200px; padding: 0.35em; height: 30px; font-size: 16px; font-weight:bold; border: 2px solid blue; background: white;">Collect Blue</button>
+            <button class="collect-purple" style="width:200px; padding: 0.35em; height: 30px; font-size: 16px; font-weight:bold; border: 2px solid purple; background: white;">Collect Purple</button>
+            <button class="collect-pink" style="width:200px; padding: 0.35em; height: 30px; font-size: 16px; font-weight:bold; border: 2px solid pink; background: white;">Collect Pink</button> -->
+
+        </div>
+
+        <!-- position: 1: higher number moves object left, max seems to be about 3.
+            position 2: higher number moves object up, max seems to be about 4. 
+            position 3: smaller number means further away from the camera, should be negative otherwise object goes behind camera, -8 works for spheres -->
+
+        <!-- GPS location based testing -->
+        <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+            <a-entity rotation="0 0 0" >
+                <a-sphere id="blue-sphere" position="-3.5 1 -6" animation="property: position; to: 5.25 1.25 -18.75; dur: 22000; easing: linear; loop: true" color="blue"></a-sphere>
+            </a-entity>
+            <a-entity rotation="0 0 0" >
+                <a-sphere id="purple-sphere" position="0 2 -9" animation="property: position; to: -3.75 1.75 -3.75; dur: 30000; easing: linear; loop: true" color="purple"></a-sphere>
+            </a-entity>
+            <a-entity rotation="0 0 0">
+                <a-sphere id="pink-sphere"  position="1 -0.5 -7" animation="property: position; to: 1.5 2.25 -22.75; dur: 20000; easing: linear; loop: false" color="pink"></a-sphere>
+            </a-entity> 
+            <div style="margin-top: 20px;"></div>
+
+            <a-icosahedron color="#FF926B" radius="5"></a-icosahedron>
+            <div style="margin-top: 20px;"></div>
+
+            <a-cylinder color="yellow" theta-start="50" theta-length="280" side="double"></a-cylinder>
+            <div style="margin-top: 20px;"></div>
+
+            <a-tetrahedron color="#FF926B" radius="5"></a-tetrahedron>
+
+        </a-scene>
+
+    </body>
+</html>
