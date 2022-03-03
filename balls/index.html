@@ -1,0 +1,67 @@
+<html>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+<script>
+    const slots = [
+        "0 0 -950",
+        "-9 0 -950",
+    ]
+    const scale = {x: 1.5, y: 1.5, z: 1.5}
+
+    AFRAME.registerComponent("blue-sphere", {
+        init: function() {
+        this.el.addEventListener("click", (e) => {
+            let element = document.querySelector("#blue-sphere")
+            element.setAttribute('scale',  scale);
+            element.setAttribute('animation',  "property: position; to: " + slots.shift() + "; dur: 1500; easing: linear; loop: false");
+            element.style.animation = 'party 2.5s infinite linear';
+            
+            element.setAttribute("opacity", "0.8")
+        })
+        }
+    })
+    AFRAME.registerComponent("red-sphere", {
+        init: function() {
+        this.el.addEventListener("click", (e) => {
+            let element = document.querySelector("#red-sphere")
+            element.setAttribute('scale',  scale);
+            element.setAttribute('animation',  "property: position; to: " + slots.shift() + "; dur: 1500; easing: linear; loop: false");
+            element.style.animation = 'party 2.5s infinite linear';
+            
+            element.setAttribute("opacity", "0.8")
+        })
+        }
+    })
+</script>
+<a-scene cursor="fuse: true; maxDistance: 30; timeout: 5000" vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false;">
+
+    <a-text value="My Collection" position="-5.5 4.5 -10" height="50px"></a-text>
+    <a-sphere blue-sphere id="blue-sphere" color="blue" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" animation__position="property: position; to: 0.25 0.25 -10.75; dur: 12000; easing: linear; loop: false"></a-sphere>
+    <a-sphere red-sphere id="red-sphere" color="red" position="-9 0.5 -3" rotation="0 45 0" color="#4CC3D9" animation__position="property: position; to: -9 0.25 -10.75; dur: 32000; easing: linear; loop: false"></a-sphere>
+
+</a-scene>
+
+<style>
+    a-scene * {
+        opacity: 0.95;
+    }
+@keyframes party{
+    0% {background-color: red;}
+    10% {background-color: orange;}
+    20% {background-color: yellow;}
+    30% {background-color: green;}
+    40% {background-color: blue;}
+    50% {background-color: purple;} 
+}
+
+@-webkit-keyframes party{
+    0% {background-color: red;}
+    10% {background-color: orange;}
+    20% {background-color: yellow;}
+    30% {background-color: green;}
+    40% {background-color: blue;}
+    50% {background-color: purple;} 
+}
+</style>
+</html>
