@@ -4,7 +4,7 @@
 
 
 <script>
-    let slots = ["-5 6 -14", "-5 4 -14", "-5 2 -14", "-5 0 -14", "-5 -2 -14", "-5 -4 -14", "5 -6 -14"]
+    let slots = ["-5 6 -14", "-5 4 -14", "-5 2 -14", "-5 0 -14", "-5 -2 -14", "-5 -4 -14", "5 -6 -8"]
   AFRAME.registerComponent('change-color-on-hover', {
     schema: {
       color: {default: 'red'}
@@ -63,11 +63,11 @@
     </a-assets>
     <a-gltf-model src="#treasureA" id="treasureAEntity" model-move="location: collection" scale="0.004 0.004 0.004" position="-2 -1 -10"  rotation="330 180 0"  animation-mixer animation__position="property: position; to: 66 -8 -7; dur: 52000; easing: linear; loop: false" collected="false"> </a-gltf-model>
     <a-gltf-model src="#spaceship" id="spaceshipEntity" model-move="location: collection" scale="0.5 0.5 0.5" position="0 14 -20"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 66 -8 -80; dur: 52000; easing: linear; loop: false" collected="false"> </a-gltf-model>
-    <a-gltf-model src="#water" id="waterEntity" model-move="location: collection" scale="4 4 4" position="0 4 -2"  rotation="0 0 0"  animation-mixer animation__position="property: position; to: 6 -8 -80; dur: 52000; easing: linear; loop: false" animation__rotation="property: rotation; to: 0 360 0; dur: 2000; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model src="#water" id="waterEntity" model-move="location: collection" scale="4 4 4" position="0 4 -2" rotation="0 0 0"  animation-mixer animation__position="property: position; to: 6 -8 -80; dur: 52000; easing: linear; loop: false" animation__rotation="property: rotation; to: 0 360 0; dur: 2000; easing: linear; loop: true" collected="false"> </a-gltf-model>
 
     <a-box color="#EF2D5E" change-color-on-hover="color: blue" opacity="0.85" position="-3 0.5 -4" rotation="0 45 0"  animation__rotation="property: rotation; to: 180 180 360; dur: 20000; easing: linear; loop: true" animation__position="property: position; to: -2.25 4.25 -22.75; dur: 22000; easing: linear; loop: true" collected="false"></a-box>
     <a-box color="lime" opacity="0.9" position="-2 -0.5 -2" change-color-on-hover="color: blue" rotation="45 0 0" animation__rotation="property: rotation; to: 360 0 360; dur: 10000; easing: linear; loop: true" animation__position="property: position; to: 3 0.5 -3; dur: 12000; easing: linear; loop: true" collected="false"></a-box>
-    <a-box color="purple" opacity="0.95" position="4 0.5 -3" change-color-on-hover="color: blue" rotation="0 0 45" animation__rotation="property: rotation; to: 360 360 270; dur: 8000; easing: linear; loop: true" animation__position="property: position; to: -3 1.5 -2; dur: 12000; easing: linear; loop: true" collected="false"></a-box>
+    <a-box src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/images/six12_logo_black_140.jpg" opacity="0.95" position="4 0.5 -3" change-color-on-hover="color: blue" rotation="0 0 45" animation__rotation="property: rotation; to: 360 360 270; dur: 8000; easing: linear; loop: true" animation__position="property: position; to: -3 1.5 -2; dur: 12000; easing: linear; loop: true" collected="false"></a-box>
 
     <a-camera><a-cursor></a-cursor></a-camera>
   </a-scene>
