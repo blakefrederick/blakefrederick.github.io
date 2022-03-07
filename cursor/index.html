@@ -4,6 +4,7 @@
 
 
 <script>
+    let slots = ["-5 4 -8", "-5 2 -8", "-5 0 -8",]
   AFRAME.registerComponent('change-color-on-hover', {
     schema: {
       color: {default: 'red'}
@@ -17,7 +18,7 @@
       el.addEventListener('mouseenter', function () {
         el.setAttribute('color', data.color);
         el.setAttribute('scale', '1.4 1.4 1.4');
-        el.setAttribute('animation__position', "property: position; to: -5 3 -8; dur: 3000; easing: linear; loop: false")
+        el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 3000; easing: linear; loop: false")
       });
 
       el.addEventListener('mouseleave', function () {
@@ -43,7 +44,7 @@
   });
 </script>
 <body>
-  <a-scene >
+  <a-scene embedded>
     <a-assets>
         <a-asset-item id="treasureA"  src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
     </a-assets>
