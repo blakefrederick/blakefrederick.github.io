@@ -4,7 +4,23 @@
 
 
 <script>
-    let slots = ["-5 6 -14", "-5 4 -14", "-5 2 -14", "-5 0 -14", "-5 -2 -14", "-5 -4 -14", "5 -6 -8"]
+
+const ModelTimings = {
+    1: "https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/SciFiHelmet/glTF/SciFiHelmet.gltf",
+    2: "https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/SmilingFace/glTF/SmilingFace.gltf",
+    3: "https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/AnimatedMorphSphere/glTF/AnimatedMorphSphere.gltf",
+    4: "https://github.com/alteous/glTF-Sample-Models-Official/blob/master/2.0/Avocado/glTF/Avocado.gltf",
+    5: "https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/BarramundiFish/glTF/BarramundiFish.gltf",
+    6: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf",
+    7: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb",
+    8: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb",
+    9: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb",
+    0: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb",
+}
+
+
+
+    let slots = ["-5 6 -11", "-5 4 -11", "-5 2 -11", "-5 0 -11", "-5 -2 -11", "-5 -4 -11", "5 -6 -11"]
   AFRAME.registerComponent('change-color-on-hover', {
     schema: {
       color: {default: 'red'}
@@ -16,12 +32,13 @@
       var defaultColor = el.getAttribute('material').color;
 
       el.addEventListener('mouseenter', function () {
+        console.log('collected object')
         el.setAttribute('color', data.color);
         el.setAttribute('scale', '1.4 1.4 1.4');
         el.setAttribute('opacity', '0.98')
         if (el.getAttribute('collected') === 'false') {
             el.setAttribute('collected', 'true');
-            el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 3000; easing: linear; loop: false")
+            el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 2000; easing: linear; loop: false")
         }
       });
 
@@ -37,12 +54,13 @@
       var el = this.el;  // <a-box>
 
       el.addEventListener('mouseenter', function () {
+          console.log('collected object')
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 1.4 + " " + scale.y * 1.4 + " " + scale.z * 1.4
         el.setAttribute('scale', newScale);
         if (el.getAttribute('collected') === 'false') {
             el.setAttribute('collected', 'true');
-            el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 3000; easing: linear; loop: false")
+            el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 2000; easing: linear; loop: false")
         }
       });
 
@@ -60,14 +78,15 @@
         <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         <a-asset-item id="spaceship" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/Baked_Animations_Intergalactic_Spaceships_Version_2.gltf"></a-asset-item>
         <a-asset-item id="water" src="https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/WaterBottle/glTF/WaterBottle.gltf"></a-asset-item>
+        <!-- <a-asset-item id="sour" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb"></a-asset-item> -->
     </a-assets>
+    <a-text value="Collection" position="-5 8 -11" height="50px"></a-text>
     <a-gltf-model src="#treasureA" id="treasureAEntity" model-move="location: collection" scale="0.004 0.004 0.004" position="-2 -1 -10"  rotation="330 180 0"  animation-mixer animation__position="property: position; to: 66 -8 -7; dur: 52000; easing: linear; loop: false" collected="false"> </a-gltf-model>
-    <a-gltf-model src="#spaceship" id="spaceshipEntity" model-move="location: collection" scale="0.5 0.5 0.5" position="0 14 -20"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 66 -8 -80; dur: 52000; easing: linear; loop: false" collected="false"> </a-gltf-model>
-    <a-gltf-model src="#water" id="waterEntity" model-move="location: collection" scale="4 4 4" position="0 4 -2" rotation="0 0 0"  animation-mixer animation__position="property: position; to: 6 -8 -80; dur: 52000; easing: linear; loop: false" animation__rotation="property: rotation; to: 0 360 0; dur: 2000; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model src="#spaceship" id="spaceshipEntity" model-move="location: collection" scale="0.45 0.45 0.45" position="-10 5 -12"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 66 14 -25; dur: 32000; easing: linear; loop: false" collected="false"> </a-gltf-model>
+    <a-gltf-model src="#water" id="waterEntity" model-move="location: collection" scale="10 10 10" position="-5 4 2" rotation="0 0 0"  animation-mixer animation__position="property: position; to: 6 -8 -80; dur: 72000; easing: linear; loop: false" animation__rotation="property: rotation; to: 0 360 0; dur: 2000; easing: linear; loop: true" collected="false"> </a-gltf-model>
 
-    <a-box color="#EF2D5E" change-color-on-hover="color: blue" opacity="0.85" position="-3 0.5 -4" rotation="0 45 0"  animation__rotation="property: rotation; to: 180 180 360; dur: 20000; easing: linear; loop: true" animation__position="property: position; to: -2.25 4.25 -22.75; dur: 22000; easing: linear; loop: true" collected="false"></a-box>
-    <a-box color="lime" opacity="0.9" position="-2 -0.5 -2" change-color-on-hover="color: blue" rotation="45 0 0" animation__rotation="property: rotation; to: 360 0 360; dur: 10000; easing: linear; loop: true" animation__position="property: position; to: 3 0.5 -3; dur: 12000; easing: linear; loop: true" collected="false"></a-box>
-    <a-box src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/images/six12_logo_black_140.jpg" opacity="0.95" position="4 0.5 -3" change-color-on-hover="color: blue" rotation="0 0 45" animation__rotation="property: rotation; to: 360 360 270; dur: 8000; easing: linear; loop: true" animation__position="property: position; to: -3 1.5 -2; dur: 12000; easing: linear; loop: true" collected="false"></a-box>
+    <a-box color="#EF2D5E" change-color-on-hover="color: blue" opacity="0.85" position="-13 0.5 4" rotation="0 45 0"  animation__rotation="property: rotation; to: 180 180 360; dur: 20000; easing: linear; loop: true" animation__position="property: position; to: -2.25 4.25 -22.75; dur: 22000; easing: linear; loop: true" collected="false"></a-box>
+    <a-box color="lime" opacity="0.9" position="42 -0.5 -2" change-color-on-hover="color: blue" rotation="45 0 0" animation__rotation="property: rotation; to: 360 0 360; dur: 10000; easing: linear; loop: true" animation__position="property: position; to: -32 0.5 -5; dur: 72000; easing: linear; loop: true" collected="false"></a-box>
 
     <a-camera><a-cursor></a-cursor></a-camera>
   </a-scene>

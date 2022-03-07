@@ -1,0 +1,95 @@
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+
+
+<script>
+
+// const ModelTimings = {
+//     1: "https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/SciFiHelmet/glTF/SciFiHelmet.gltf",
+//     2: "https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/SmilingFace/glTF/SmilingFace.gltf",
+//     3: "https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/AnimatedMorphSphere/glTF/AnimatedMorphSphere.gltf",
+//     4: "https://github.com/alteous/glTF-Sample-Models-Official/blob/master/2.0/Avocado/glTF/Avocado.gltf",
+//     5: "https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/BarramundiFish/glTF/BarramundiFish.gltf",
+//     6: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf",
+//     7: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb",
+//     8: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb",
+//     9: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb",
+//     0: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb",
+// }
+
+window.onload = function(e){ 
+}
+
+
+    let slots = ["-5 6 -11", "-5 4 -11", "-5 2 -11", "-5 0 -11", "-5 -2 -11", "-5 -4 -11", "5 -6 -11"]
+  AFRAME.registerComponent('change-color-on-hover', {
+    schema: {
+      color: {default: 'red'}
+    },
+
+    init: function () {
+      var data = this.data;
+      var el = this.el;  // <a-box>
+      var defaultColor = el.getAttribute('material').color;
+
+      el.addEventListener('mouseenter', function () {
+        console.log('collected object')
+        el.setAttribute('color', data.color);
+        el.setAttribute('scale', '1.4 1.4 1.4');
+        el.setAttribute('opacity', '0.98')
+        if (el.getAttribute('collected') === 'false') {
+            el.setAttribute('collected', 'true');
+            el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 2000; easing: linear; loop: false")
+        }
+      });
+
+      el.addEventListener('mouseleave', function () {
+        el.setAttribute('color', defaultColor);
+        el.setAttribute('scale', '1 1 1');
+      });
+    }
+  });
+  AFRAME.registerComponent('model-move', {
+    init: function () {
+      var data = this.data;
+      var el = this.el;  // <a-box>
+
+      el.addEventListener('mouseenter', function () {
+          console.log('collected object')
+        let scale = el.getAttribute('scale')
+        let newScale = scale.x * 1.4 + " " + scale.y * 1.4 + " " + scale.z * 1.4
+        el.setAttribute('scale', newScale);
+        if (el.getAttribute('collected') === 'false') {
+            el.setAttribute('collected', 'true');
+            el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 2000; easing: linear; loop: false")
+        }
+      });
+
+      el.addEventListener('mouseleave', function () {
+        let scale = el.getAttribute('scale')
+        let newScale = scale.x * 0.6 + " " + scale.y * 0.6 + " " + scale.z * 0.6
+        el.setAttribute('scale', newScale);
+      });
+    }
+  });
+  AFRAME.registerComponent('model-src', {
+    init: function () {
+      var data = this.data;
+      var el = this.el;  
+      console.log("el", el)
+    }
+  });
+</script>
+<body>
+  <a-scene embedded>
+    <a-assets>
+        <a-asset-item id="model" src="" model-src></a-asset-item>
+    </a-assets>
+    <a-gltf-model src="#model" id="modelEntity" model-move="location: collection" scale="2 2 2" position="-2 -1 -1"  rotation="330 180 0"  animation-mixer animation__position="property: position; to: 6 -8 -7; dur: 52000; easing: linear; loop: false" collected="false"> </a-gltf-model>
+
+    <a-box color="lime" opacity="0.9" position="-2 -0.5 -2" change-color-on-hover="color: blue" rotation="45 0 0" animation__rotation="property: rotation; to: 360 0 360; dur: 10000; easing: linear; loop: true" animation__position="property: position; to: 3 0.5 -3; dur: 12000; easing: linear; loop: true" collected="false"></a-box>
+
+    <a-camera><a-cursor></a-cursor></a-camera>
+  </a-scene>
+</body>
