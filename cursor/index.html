@@ -20,7 +20,7 @@ const ModelTimings = {
 
 
 
-    let slots = ["-5 6 -11", "-5 4 -11", "-5 2 -11", "-5 0 -11", "-5 -2 -11", "-5 -4 -11", "5 -6 -11"]
+    let slots = ["-5 6 -13", "-5 4 -13", "-5 2 -13", "-5 0 -13", "-5 -2 -13", "-5 -4 -13", "5 -6 -13"]
   AFRAME.registerComponent('change-color-on-hover', {
     schema: {
       color: {default: 'red'}
@@ -73,14 +73,14 @@ const ModelTimings = {
   });
 </script>
 <body>
-  <a-scene embedded>
+  <a-scene embedded vr-mode-ui="enabled: false">
     <a-assets>
         <a-asset-item id="treasureA" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
         <a-asset-item id="spaceship" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/Baked_Animations_Intergalactic_Spaceships_Version_2.gltf"></a-asset-item>
         <a-asset-item id="water" src="https://raw.githubusercontent.com/alteous/glTF-Sample-Models-Official/master/2.0/WaterBottle/glTF/WaterBottle.gltf"></a-asset-item>
         <!-- <a-asset-item id="sour" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb"></a-asset-item> -->
     </a-assets>
-    <a-text value="Collection" position="-5 8 -11" height="50px"></a-text>
+    <a-text value="Collection" position="-5 8 -13" height="50px"></a-text>
     <a-gltf-model src="#treasureA" id="treasureAEntity" model-move="location: collection" scale="0.004 0.004 0.004" position="-2 -1 -10"  rotation="330 180 0"  animation-mixer animation__position="property: position; to: 66 -8 -7; dur: 52000; easing: linear; loop: false" collected="false"> </a-gltf-model>
     <a-gltf-model src="#spaceship" id="spaceshipEntity" model-move="location: collection" scale="0.45 0.45 0.45" position="-10 5 -12"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 66 14 -25; dur: 32000; easing: linear; loop: false" collected="false"> </a-gltf-model>
     <a-gltf-model src="#water" id="waterEntity" model-move="location: collection" scale="10 10 10" position="-5 4 2" rotation="0 0 0"  animation-mixer animation__position="property: position; to: 6 -8 -80; dur: 72000; easing: linear; loop: false" animation__rotation="property: rotation; to: 0 360 0; dur: 2000; easing: linear; loop: true" collected="false"> </a-gltf-model>
