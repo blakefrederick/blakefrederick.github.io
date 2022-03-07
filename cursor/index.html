@@ -1,0 +1,38 @@
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+
+
+<script>
+  AFRAME.registerComponent('change-color-on-hover', {
+    schema: {
+      color: {default: 'red'}
+    },
+
+    init: function () {
+      var data = this.data;
+      var el = this.el;  // <a-box>
+      var defaultColor = el.getAttribute('material').color;
+
+      el.addEventListener('mouseenter', function () {
+        el.setAttribute('color', data.color);
+        el.setAttribute('scale', '1.4 1.4 1.4');
+        el.setAttribute('animation__position', "property: position; to: -5 3 -8; dur: 3000; easing: linear; loop: false")
+      });
+
+      el.addEventListener('mouseleave', function () {
+        el.setAttribute('color', defaultColor);
+        el.setAttribute('scale', '1 1 1');
+      });
+    }
+  });
+</script>
+<body>
+  <a-scene embedded>
+    <a-box color="#EF2D5E" change-color-on-hover="color: blue" position="-3 0.5 -4" rotation="0 45 0"  animation__rotation="property: rotation; to: 180 180 360; dur: 20000; easing: linear; loop: true" animation__position="property: position; to: -2.25 4.25 -22.75; dur: 22000; easing: linear; loop: true"></a-box>
+    <a-box color="lime" position="-2 -0.5 -2" change-color-on-hover="color: purple" rotation="45 0 0" animation__rotation="property: rotation; to: 360 0 360; dur: 10000; easing: linear; loop: true" animation__position="property: position; to: 3 0.5 -3; dur: 12000; easing: linear; loop: true"></a-box>
+    <a-box color="blue" position="2 0.5 -3" change-color-on-hover="color: #EF2D5E" rotation="0 0 45" animation__rotation="property: rotation; to: 360 360 270; dur: 8000; easing: linear; loop: true" animation__position="property: position; to: -3 1.5 -2; dur: 12000; easing: linear; loop: true"></a-box>
+
+    <a-camera><a-cursor></a-cursor></a-camera>
+  </a-scene>
+</body>

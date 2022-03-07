@@ -47,7 +47,7 @@
    
 </script>
 <a-scene cursor="rayOrigin: mouse" embedded vr-mode-ui="enabled: false"  arjs="sourceType: webcam; debugUIEnabled: false;">
-    <a-entity camera look-controls="enabled: false;" position="0 0 0">
+    <a-entity camera position="0 0 -1" laser-controls="hand: right">
     <a-text value="Tap the ball" position="-5.5 4.5 -10" height="50px" animation__position="property: position; to: 5.5 -4.5 -3; dur: 44000; easing: linear; loop: true"></a-text>
     <a-box blue-sphere id="blue-sphere" src="https://blakefrederick.github.io/swap/arceus.png" 
     position="-2 1 -5"  
