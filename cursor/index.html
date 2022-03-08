@@ -18,7 +18,9 @@ const ModelTimings = {
     0: "https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/SPK_AR_Demo_0125c.glb",
 }
 
-
+ function getRand(min, max) {
+   return Math.floor(Math.random() * (max - min + 1)) + min
+ }
 
     let slots = ["-5 6 -13", "-5 4 -13", "-5 2 -13", "-5 0 -13", "-5 -2 -13", "-5 -4 -13", "5 -6 -13"]
   AFRAME.registerComponent('change-color-on-hover', {
@@ -52,6 +54,8 @@ const ModelTimings = {
     init: function () {
       var data = this.data;
       var el = this.el;  // <a-box>
+
+      el.setAttribute('position', getRand(-5, 5) + " " + getRand(-5, 5) + " " + getRand(-2, -15))
 
       el.addEventListener('mouseenter', function () {
           console.log('collected object')
