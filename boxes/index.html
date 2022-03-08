@@ -25,7 +25,6 @@ Colors.names = {
     gold: "#ffd700",
     green: "#008000",
     indigo: "#4b0082",
-    khaki: "#f0e68c",
     lime: "#00ff00",
     magenta: "#ff00ff",
     maroon: "#800000",
@@ -62,18 +61,22 @@ Colors.random = function() {
       var el = this.el;  // <a-box>
 
       el.setAttribute('position', getRand(-15, 15) + " " + getRand(-75, 75) + " " + getRand(-20, 50))
-      el.setAttribute('animation__position', "property: position; to: " + getRand(-70, 70) + " " + getRand(-15, 15) + " " + getRand(-20, 20) + "; dur: 32000; easing: linear; loop: true")
-      el.setAttribute('color', Colors.random())
+      el.setAttribute('animation__position', "property: position; to: " + getRand(-70, 70) + " " + getRand(-10, 10) + " " + getRand(-20, 20) + "; dur: 32000; easing: linear; loop: false")
+      var defaultColor = Colors.random()
+      el.setAttribute('color', defaultColor)
 
       el.addEventListener('mouseenter', function () {
+        el.setAttribute('color', 'yellow');
         console.log('collected object')
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 1.4 + " " + scale.y * 1.4 + " " + scale.z * 1.4
         el.setAttribute('scale', newScale);
         if (el.getAttribute('collected') === 'false') {
+          setTimeout(() => {
             el.setAttribute('collected', 'true')
             el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 1500; easing: linear; loop: false")
             el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 1500; easing: linear; loop: false")
+          }, 333)
         }
         if (slots.length === 0) {
             document.getElementById('collectedAll').setAttribute('visible', 'true');
@@ -82,6 +85,7 @@ Colors.random = function() {
       });
 
       el.addEventListener('mouseleave', function () {
+        el.setAttribute('color', defaultColor);
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 0.71 + " " + scale.y * 0.71 + " " + scale.z * 0.71
         el.setAttribute('scale', newScale)
@@ -90,14 +94,12 @@ Colors.random = function() {
   });
 </script>
 <style>
-  #collectedAll {
-    visibility: hidden;
-  }
+
 </style>
 <body>
   <a-scene embedded vr-mode-ui="enabled: false">
-    <a-plane color="orange" id="plane" height="40" width="60" position="6 0 -35" opacity="0.7"></a-plane>
-    <a-text value="Collection" position="-5 8 -13" visible="false" height="50px" width="30px"></a-text>
+    <a-plane color="orange" id="plane" height="40" width="60" position="6 0 -35" visible="false" opacity="0.7"></a-plane>
+    <a-text value="Collection" position="-5 8 -13"  height="50px" width="30px"></a-text>
     <a-text id="collectedAll" visible="false" color="white" value="You collected all boxes!" position="1 0 -15" height="50px" width="50px"></a-text>
     <a-box model-move="location: collection" scale="1.5 1.5 1.5" position="-10 -5 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-box>
     <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="-10 5 -12"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 0 14 -6; dur: 42000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-box>
