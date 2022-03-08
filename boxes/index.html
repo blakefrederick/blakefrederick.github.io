@@ -77,7 +77,7 @@ Colors.random = function() {
             el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 1500; easing: linear; loop: false")
             el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 1500; easing: linear; loop: false")
         }
-        if (slots.length === 12) {
+        if (slots.length === 0) {
             document.getElementById('collectedAll').setAttribute('visible', 'true');
         }
       });
