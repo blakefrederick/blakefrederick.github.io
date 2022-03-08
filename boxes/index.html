@@ -82,6 +82,7 @@ Colors.random = function() {
         if (slots.length === 0) {
             document.getElementById('collectedAll').setAttribute('visible', 'true');
             document.getElementById('plane').setAttribute('visible', 'true');
+            el.setAttribute('animation__rotation', "property: rotation; to: 90 90 180; dur: 2500; easing: linear; loop: true")
         }
       });
 
