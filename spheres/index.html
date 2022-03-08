@@ -52,9 +52,9 @@ Colors.random = function() {
    return Math.floor(Math.random() * (max - min + 1)) + min
  }
 
-    let slots = ["-5 12 -13", "-5 8 -13", "-5 4 -13", "-5 0 -13", "-5 -4 -13", "-5 -8 -13", "-5 -12 -13", 
+    let slots = ["-8 12 -13", "-8 8 -13", "-8 4 -13", "-8 0 -13", "-8 -4 -13", "-8 -8 -13", "-8 -12 -13", 
     "-3 12 -13", "-3, 8, -13", "-3, 4, -13", "-3 0 -13", "-3 -4 -13", "-3 -8 -13", "-3 -12 -13",
-    "-1 12 -13", "-1, 8, -13", "-1, 4, -13", "-1 0 -13", "-1 -4 -13", "-1 -8 -13", "-1 -12 -13"]
+    "2 12 -13", "2, 8, -13", "2, 4, -13", "2 0 -13", "2 -4 -13", "2 -8 -13", "2 -12 -13"]
 
   AFRAME.registerComponent('model-move', {
     init: function () {
@@ -89,9 +89,9 @@ Colors.random = function() {
         let newScale = scale.x * 1.4 + " " + scale.y * 1.4 + " " + scale.z * 1.4
         el.setAttribute('scale', newScale);
         if (el.getAttribute('collected') === 'false') {
+          el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 1500; easing: linear; loop: false")
           setTimeout(() => {
             el.setAttribute('collected', 'true')
-            el.setAttribute('animation__position', "property: position; to: " + slots.shift() + "; dur: 1500; easing: linear; loop: false")
             el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 1500; easing: linear; loop: false")
           }, 333)
         }
@@ -114,12 +114,16 @@ Colors.random = function() {
   });
 </script>
 <style>
-
+#yourCollection {
+  color: blue;
+  background: yellow;
+}
 </style>
 <body>
   <a-scene embedded vr-mode-ui="enabled: false">
     <a-plane color="pink" id="plane" height="40" width="60" position="6 0 -35" visible="false" opacity="0.7"></a-plane>
-    <a-text value="Collection" position="-6 15 -13"  height="50px" width="30px"></a-text>
+    <a-plane color="pink" id="plane" height="5" width="15" position="-5.5 15 -15.5" visible="true" opacity="0.7"></a-plane>
+    <a-text value="Collection" color="purple" id="yourCollection" position="-6 15 -13"  height="50px" width="30px"></a-text>
     <a-text id="collectedAll" visible="false" color="white" value="You collected all spheres!" position="1 0 -15" height="50px" width="50px"></a-text>
     <a-sphere model-move="location: collection" scale="1.5 1.5 1.5" position="-10 -5 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-sphere>
     <a-sphere  model-move="location: collection" scale="1.5 1.5 1.5" position="-10 5 -12"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 0 14 -6; dur: 42000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-sphere>
