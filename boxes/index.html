@@ -11,7 +11,6 @@ Colors.names = {
     aqua: "#00ffff",
     azure: "#f0ffff",
     beige: "#f5f5dc",
-    black: "#000000",
     blue: "#0000ff",
     brown: "#a52a2a",
     cyan: "#00ffff",
@@ -23,8 +22,7 @@ Colors.names = {
     darksalmon: "#e9967a",
     darkviolet: "#9400d3",
     fuchsia: "#ff00ff",
-    gold: "#ffd700",
-    green: "#008000",
+      green: "#008000",
     indigo: "#4b0082",
     lime: "#00ff00",
     magenta: "#ff00ff",
@@ -36,7 +34,6 @@ Colors.names = {
     violet: "#800080",
     red: "#ff0000",
     silver: "#c0c0c0",
-    yellow: "#ffff00"
 };
 
 Colors.random = function() {
@@ -93,7 +90,7 @@ Colors.random = function() {
         if (slots.length === 0) {
             document.getElementById('collectedAll').setAttribute('visible', 'true');
             document.getElementById('plane').setAttribute('visible', 'true');
-            document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 30; dur: 20000; easing: easeIn; loop: false")
+            document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 30; dur: 20000; easing: linear; loop: false")
             el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 250; easing: linear; loop: false")
         }
       });
@@ -124,7 +121,7 @@ Colors.random = function() {
 </style>
 <body>
   <a-scene embedded vr-mode-ui="enabled: false">
-    <a-plane color="orange" id="plane" height="40" width="80" position="7 0 -35" visible="false" opacity="0.7" animation__position="property: position; to: 7 0 -45; delay: 20000; dur: 50000; easing: linear; loop: false"></a-plane>
+    <a-plane color="blue" id="plane" height="40" width="80" position="7 0 -35" visible="false" opacity="0.6" animation__position="property: position; to: 7 0 -45; delay: 20000; dur: 50000; easing: linear; loop: false"></a-plane>
     <a-text id="collectedText" value="Collected" position="-7 8.5 -13"  height="55px" width="40px"></a-text>
     <a-text id="collectedAll" visible="false" color="white" value="You collected all boxes!" position="1 0 -15" height="50px" width="50px"></a-text>
     <a-box model-move="location: collection" scale="1.5 1.5 1.5" position="-10 -5 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-box>
