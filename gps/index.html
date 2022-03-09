@@ -218,9 +218,13 @@ Colors.random = function() {
       <input type="phone" id="phone"></input>
     </div> -->
     <!-- gps-entity-place="longitude: 49.26267967021366; latitude: -123.03669577077862;" -->
+
+    <a-box  model-move="location: collection" gps-entity-place="longitude: 49.269535021167506; latitude: -123.06030490503925;" scale="5 5 5" position="10 5 -12"  rotation="0 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 2000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 0 90; dur: 2500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" gps-entity-place="longitude: 50.269535021167506; latitude: -128.06030490503925;" scale="5 5 5" position="10 5 -12"  rotation="0 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 2000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 0 90; dur: 200; easing: linear; loop: true" collected="false"> </a-box>
+
     <a-text id="collectedAll" visible="false" color="white" value="You collected all boxes!" position="1 0 -15" height="50px" width="50px"></a-text>
     <a-gltf-model id="currentModelToFind" src="#currentModel" position="0 -3 -10" scale="0.02 0.02 0.02" rotation="0 0 0" model-move="location: collection" collectable="true" animation__rotation="property: rotation; to: 0 360 0; dur: 2500; easing: linear; loop: true" collected="false" visible="true"></a-gltf-model>
-    <a-camera id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40">
+    <a-camera gps-camera id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40">
       <a-gltf-model id="currentModelCollected" src="#currentModel" position="-3 -3 -10" scale="0.02 0.02 0.02" rotation="0 0 0"  collectable="false" animation__rotation="property: rotation; to: 0 360 0; dur: 4500; easing: linear; loop: true" collected="true" visible="false"></a-gltf-model>
       <a-cursor id="cursor" color="black"></a-cursor>
     </a-camera>
