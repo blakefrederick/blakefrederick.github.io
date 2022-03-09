@@ -148,6 +148,7 @@ Colors.random = function() {
           el.setAttribute('collected', 'true')
           numCollected++
           document.getElementById('collectedText').setAttribute('value', 'Collected item #' + getCurrentHour() + '!')
+          document.getElementById('plane').setAttribute('color', 'purple');
           // Animate to collection
           let nextOpenSlot = slots.shift()
           // el.setAttribute('animation__position', "property: position; to: " + nextOpenSlot + "; dur: 1500; delay: 333; easing: linear; loop: false")
@@ -210,8 +211,8 @@ Colors.random = function() {
     <a-assets>
       <a-asset-item id="currentModel" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf"></a-asset-item>
     </a-assets>
-    <a-plane color="blue" id="hud" height="8" width="30" position="6 8.5 -15" visible="true" opacity="0.7" animation__position="property: position; to: 7 0 -45; delay: 20000; dur: 50000; easing: linear; loop: false"></a-plane>
-    <a-text id="collectedText" collected-text="" value="Look around to find object" position="-7 8.5 -13"  height="55px" width="40px"></a-text>
+    <a-plane color="blue" id="plane" height="8" width="30" position="6 8.5 -15" visible="true" opacity="0.7" animation__position="property: position; to: 7 0 -45; delay: 15000; dur: 55000; easing: linear; loop: false"></a-plane>
+    <a-text id="collectedText" collected-text="" value="Look around to find object" position="-7 8.5 -13"  height="55px" width="40px" animation__position="property: position; to: -5 0 -42; delay: 15000; dur: 55000; easing: linear; loop: false"></a-text>
     <!-- <div class="phoneWrapper">
       <div>Enter your phone number to save progress</div>
       <input type="phone" id="phone"></input>
