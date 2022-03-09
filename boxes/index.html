@@ -78,14 +78,16 @@ Colors.random = function() {
           el.setAttribute('collected', 'true')
           el.setAttribute('animation__position', "property: position; to: " + nextOpenSlot + "; dur: 1500; delay: 333; easing: linear; loop: false")
           setTimeout(() => {
-            el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 1500; easing: linear; loop: false")
+            el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 500; easing: linear; loop: true")
           }, 333)
         }
+        // Collected All state
         if (slots.length === 0) {
             document.getElementById('collectedAll').setAttribute('visible', 'true');
             document.getElementById('plane').setAttribute('visible', 'true');
-            document.getElementById('camera').setAttribute('animation__position', "property: position; to: 0 0 5; dur: 10000; easing: linear; loop: false")
+            document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 30; dur: 20000; easing: easeIn; loop: false")
             el.setAttribute('animation__position', "property: position; to: " + nextOpenSlot + "; dur: 1500; delay: 333; easing: linear; loop: false")
+            el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 250; easing: linear; loop: false")
         }
       });
 
@@ -94,6 +96,13 @@ Colors.random = function() {
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 0.71 + " " + scale.y * 0.71 + " " + scale.z * 0.71
         el.setAttribute('scale', newScale)
+        // Randomly boot one out of there for fun
+        // Collected All state
+        if (slots.length === 0) {
+          if (getRand(1, 10) <= 2) {
+            el.setAttribute('animation__position', "property: position; to: 0 0 -500; dur: 1500; delay: 666; easeOut: linear; loop: false")
+          }
+        }
       });
     }
   });
