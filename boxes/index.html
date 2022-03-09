@@ -106,7 +106,7 @@ Colors.random = function() {
         if (slots.length === 0) {
           // if (getRand(1, 10) <= 10) {
             // Randomly boot one out of there for fun
-            el.setAttribute('animation__position', "property: position; to: " + getRand(-5, 5) + " " + getRand(-15, -1) + " -1000; dur: 2500; delay: 266; easing: linear; loop: false")
+            el.setAttribute('animation__position', "property: position; to: " + getRand(-55, 55) + " " + getRand(-66, -15) + " -1000; dur: 2500; delay: 666; easing: linear; loop: false")
           // }
         }
       });
@@ -118,7 +118,7 @@ Colors.random = function() {
 </style>
 <body>
   <a-scene embedded vr-mode-ui="enabled: false">
-    <a-plane color="orange" id="plane" height="40" width="80" position="7 0 -35" visible="false" opacity="0.7" animation__position="property: position; to: 7 0 -585; dur: 162000; easing: linear; loop: false"></a-plane>
+    <a-plane color="orange" id="plane" height="40" width="80" position="7 0 -35" visible="false" opacity="0.7" animation__position="property: position; to: 7 0 -45; delay: 20000; dur: 50000; easing: linear; loop: false"></a-plane>
     <a-text id="collectedText" value="Collected" position="-7 8.5 -13"  height="55px" width="40px"></a-text>
     <a-text id="collectedAll" visible="false" color="white" value="You collected all boxes!" position="1 0 -15" height="50px" width="50px"></a-text>
     <a-box model-move="location: collection" scale="1.5 1.5 1.5" position="-10 -5 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-box>
