@@ -57,6 +57,7 @@ Colors.random = function() {
     "-1 6 -13", "-1, 4, -13", "-1, 2, -13", "-1 0 -13", "-1 -2 -13", "-1 -4 -13", "-1 -6 -13"]
     const totalToCollect = 21
     let numCollected = 0
+    var readyToBoot = false;
 
   AFRAME.registerComponent('model-move', {
     init: function () {
@@ -102,11 +103,16 @@ Colors.random = function() {
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 0.71 + " " + scale.y * 0.71 + " " + scale.z * 0.71
         el.setAttribute('scale', newScale)
+        if (slots.length === 0 && !readyToBoot) {
+          setTimeout(() => {
+            readyToBoot = true;
+          }, 888)
+        }
         // Collected All state
-        if (slots.length === 0) {
+        if (readyToBoot) {
           // if (getRand(1, 10) <= 10) {
             // Randomly boot one out of there for fun
-            el.setAttribute('animation__position', "property: position; to: " + getRand(-55, 55) + " " + getRand(-66, -15) + " -1000; dur: 2500; delay: 666; easing: linear; loop: false")
+            el.setAttribute('animation__position', "property: position; to: " + getRand(-35, 35) + " " + getRand(-296, -50) + " -1000; dur: 2500; delay: 366; easing: linear; loop: false")
           // }
         }
       });
