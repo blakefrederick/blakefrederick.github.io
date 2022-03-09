@@ -100,7 +100,7 @@ Colors.random = function() {
         // Collected All state
         if (slots.length === 0) {
           if (getRand(1, 10) <= 2) {
-            el.setAttribute('animation__position', "property: position; to: 0 0 -500; dur: 1500; delay: 666; easeOut: linear; loop: false")
+            el.setAttribute('animation__position', "property: position; to: " + getRand(-5, 5) + " " + getRand(-5, 5) + " -500; dur: 1500; delay: 666; easeOut: linear; loop: false")
           }
         }
       });
