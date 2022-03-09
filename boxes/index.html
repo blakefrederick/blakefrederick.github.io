@@ -104,10 +104,10 @@ Colors.random = function() {
         el.setAttribute('scale', newScale)
         // Collected All state
         if (slots.length === 0) {
-          if (getRand(1, 10) <= 10) {
+          // if (getRand(1, 10) <= 10) {
             // Randomly boot one out of there for fun
-            el.setAttribute('animation__position', "property: position; to: " + getRand(-5, 5) + " " + getRand(-15, -1) + " -500; dur: 2500; delay: 222; easing: eastOut; loop: false")
-          }
+            el.setAttribute('animation__position', "property: position; to: " + getRand(-5, 5) + " " + getRand(-15, -1) + " -1000; dur: 2500; delay: 266; easing: linear; loop: false")
+          // }
         }
       });
     }
