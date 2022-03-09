@@ -74,6 +74,31 @@ Colors.random = function() {
         return color;
       }
 
+      setTimeout(() => {
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+
+        function success(pos) {
+          var crd = pos.coords;
+
+          console.log('Your current position is:');
+          console.log(`Latitude : ${crd.latitude}`);
+          console.log(`Longitude: ${crd.longitude}`);
+          console.log(`More or less ${crd.accuracy} meters.`);
+        }
+
+        function error(err) {
+          console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+      }, 7000)
+
 
 
       </script>
@@ -85,18 +110,22 @@ Colors.random = function() {
     <body class="animated" style='margin : 0px; overflow: hidden;'>
 
           <!-- location based testing -->
-          <a-scene gps-camera embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+          <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+            <!-- simulateLatitude="49.2694464" simulateLongitude="-123.0598674" -->
+            <a-camera gps-camera rotation-reader></a-camera>
             <!-- ck langley -->
             <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="1 0 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.16275788178612; latitude: -122.63911809729908;" animation-mixer></a-entity> 
             <!-- m dw -->
             <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 1 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.162526; latitude: -122.609065;" animation-mixer></a-entity>  
             <!-- m lr -->
             <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 0 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.162451; latitude: -122.609349;" animation-mixer></a-entity>  
-            <!-- b -->
-            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 180 0"   position="-1 0 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.269535021167506; latitude: -123.06030490503925;" animation-mixer></a-entity>  
-            <a-box color="blue" position="0.2 0.2 -22" gps-entity-place="longitude: 49.269535021167506; latitude: -183.06030490503925;" scale="3 3 3" animation-mixer></a-box>
             <!-- bus stop -->
             <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 -1 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="longitude: 49.26198814493848; latitude: -123.03712070791485;" animation-mixer></a-entity> 
+            <!-- b -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 180 0"   position="-1 0 -5"  scale="0.0020 0.0020 0.0020" 
+            gps-entity-place="longitude: 49.2694464; latitude: -123.0598674;" animation-mixer></a-entity>  
+            <a-box color="blue" position="0.2 0.2 -22" gps-entity-place="longitude: 49.2694464; latitude: -123.0598674; scale="3 3 3" animation-mixer></a-box>
+
         </a-scene>
 
     </body>
