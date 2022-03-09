@@ -224,7 +224,7 @@ Colors.random = function() {
 
     <a-text id="collectedAll" visible="false" color="white" value="You collected all boxes!" position="1 0 -15" height="50px" width="50px"></a-text>
     <a-gltf-model id="currentModelToFind" src="#currentModel" position="0 -3 -10" scale="0.02 0.02 0.02" rotation="0 0 0" model-move="location: collection" collectable="true" animation__rotation="property: rotation; to: 0 360 0; dur: 2500; easing: linear; loop: true" collected="false" visible="true"></a-gltf-model>
-    <a-camera gps-camera rotation-reader id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40">
+    <a-camera gps-camera id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40">
       <a-gltf-model id="currentModelCollected" src="#currentModel" position="-3 -3 -10"  scale="0.02 0.02 0.02" rotation="0 0 0"  collectable="false" animation__rotation="property: rotation; to: 0 360 0; dur: 4500; easing: linear; loop: true" collected="true" visible="false"></a-gltf-model>
       <a-cursor id="cursor" color="black"></a-cursor>
     </a-camera>
