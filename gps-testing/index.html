@@ -74,6 +74,8 @@ Colors.random = function() {
         return color;
       }
 
+
+
       setTimeout(() => {
         var options = {
           enableHighAccuracy: true,
@@ -96,7 +98,7 @@ Colors.random = function() {
 
         navigator.geolocation.getCurrentPosition(success, error, options);
 
-        const distanceMsg = document.getElementById('treasure').getAttribute('distance');
+        let distanceMsg = document.querySelector('[gps-entity-place]').getAttribute('distanceMsg');
         console.log(distanceMsg);   // "890 meters"
 
 
@@ -132,6 +134,5 @@ Colors.random = function() {
         </a-scene>
 
     </body>
-
 
 </html>
