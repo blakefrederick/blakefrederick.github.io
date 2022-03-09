@@ -93,7 +93,6 @@ Colors.random = function() {
             document.getElementById('collectedAll').setAttribute('visible', 'true');
             document.getElementById('plane').setAttribute('visible', 'true');
             document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 30; dur: 20000; easing: easeIn; loop: false")
-            el.setAttribute('animation__position', "property: position; to: " + nextOpenSlot + "; dur: 1500; delay: 333; easing: linear; loop: false")
             el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 250; easing: linear; loop: false")
         }
       });
@@ -103,11 +102,11 @@ Colors.random = function() {
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 0.71 + " " + scale.y * 0.71 + " " + scale.z * 0.71
         el.setAttribute('scale', newScale)
-        // Randomly boot one out of there for fun
         // Collected All state
         if (slots.length === 0) {
-          if (getRand(1, 10) <= 2) {
-            el.setAttribute('animation__position', "property: position; to: " + getRand(-5, 5) + " " + getRand(-15, -1) + " -500; dur: 2500; delay: 666; easing: eastOut; loop: false")
+          if (getRand(1, 10) <= 10) {
+            // Randomly boot one out of there for fun
+            el.setAttribute('animation__position', "property: position; to: " + getRand(-5, 5) + " " + getRand(-15, -1) + " -500; dur: 2500; delay: 222; easing: eastOut; loop: false")
           }
         }
       });
@@ -119,8 +118,8 @@ Colors.random = function() {
 </style>
 <body>
   <a-scene embedded vr-mode-ui="enabled: false">
-    <a-plane color="orange" id="plane" height="40" width="60" position="6 0 -35" visible="false" opacity="0.7"></a-plane>
-    <a-text id="collectedText" value="Collected" position="-7 8 -13"  height="55px" width="40px"></a-text>
+    <a-plane color="orange" id="plane" height="40" width="60" position="5.5 0 -35" visible="false" opacity="0.7"></a-plane>
+    <a-text id="collectedText" value="Collected" position="-7 8.5 -13"  height="55px" width="40px"></a-text>
     <a-text id="collectedAll" visible="false" color="white" value="You collected all boxes!" position="1 0 -15" height="50px" width="50px"></a-text>
     <a-box model-move="location: collection" scale="1.5 1.5 1.5" position="-10 -5 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-box>
     <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="-10 5 -12"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 0 14 -6; dur: 42000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-box>
@@ -144,6 +143,6 @@ Colors.random = function() {
     <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="270 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 90 90; dur: 500; easing: linear; loop: true" collected="false"> </a-box>
     <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 0 90; dur: 2500; easing: linear; loop: true" collected="false"> </a-box>
 
-    <a-camera id="camera" animation__position position="0 0 40"><a-cursor></a-cursor></a-camera>
+    <a-camera id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40"><a-cursor></a-cursor></a-camera>
   </a-scene>
 </body>
