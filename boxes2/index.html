@@ -1,0 +1,151 @@
+<meta name="apple-mobile-web-app-capable" content="yes"> 
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+
+
+<script>
+
+Colors = {};
+Colors.names = {
+    aqua: "#00ffff",
+    azure: "#f0ffff",
+    beige: "#f5f5dc",
+    blue: "#0000ff",
+    brown: "#a52a2a",
+    cyan: "#00ffff",
+    darkblue: "#00008b",
+    darkcyan: "#008b8b",
+    darkorange: "#ff8c00",
+    darkorchid: "#9932cc",
+    darkred: "#8b0000",
+    darksalmon: "#e9967a",
+    darkviolet: "#9400d3",
+    fuchsia: "#ff00ff",
+      green: "#008000",
+    indigo: "#4b0082",
+    lime: "#00ff00",
+    magenta: "#ff00ff",
+    maroon: "#800000",
+    navy: "#000080",
+    orange: "#ffa500",
+    pink: "#ffc0cb",
+    purple: "#800080",
+    violet: "#800080",
+    red: "#ff0000",
+    silver: "#c0c0c0",
+};
+
+Colors.random = function() {
+    var result;
+    var count = 0;
+    for (var prop in this.names)
+        if (Math.random() < 1/++count)
+           result = prop;
+    return result;
+};
+
+ function getRand(min, max) {
+   return Math.floor(Math.random() * (max - min + 1)) + min
+ }
+
+    let slots = ["-5 6 -13", "-5 4 -13", "-5 2 -13", "-5 0 -13", "-5 -2 -13", "-5 -4 -13", "-5 -6 -13", 
+    "-3 6 -13", "-3, 4, -13", "-3, 2, -13", "-3 0 -13", "-3 -2 -13", "-3 -4 -13", "-3 -6 -13",
+    "-1 6 -13", "-1, 4, -13", "-1, 2, -13", "-1 0 -13", "-1 -2 -13", "-1 -4 -13", "-1 -6 -13"]
+    const totalToCollect = 21
+    let numCollected = 0
+    var readyToBoot = false;
+
+  AFRAME.registerComponent('model-move', {
+    init: function () {
+      var data = this.data;
+      var el = this.el;  // <a-box>
+
+      el.setAttribute('position', getRand(-45, 45) + " " + getRand(-75, 75) + " " + getRand(-30, 50))
+      el.setAttribute('animation__position', "property: position; to: " + getRand(-30, 30) + " " + getRand(-10, 10) + " " + getRand(-20, 10) + "; dur: 32000; easing: linear; loop: false")
+      var defaultColor = Colors.random()
+      el.setAttribute('color', defaultColor)
+
+      el.addEventListener('mouseenter', function () {
+        console.log(el.getAttribute('animation__rotation'))
+        el.setAttribute('color', 'yellow');
+        console.log('collected object')
+        let scale = el.getAttribute('scale')
+        let newScale = scale.x * 1.4 + " " + scale.y * 1.4 + " " + scale.z * 1.4
+        el.setAttribute('scale', newScale);
+        // Collected a New One
+        if (el.getAttribute('collected') === 'false') {
+          el.setAttribute('collected', 'true')
+          numCollected++
+          // Animate to collection
+          let nextOpenSlot = slots.shift()
+          el.setAttribute('animation__position', "property: position; to: " + nextOpenSlot + "; dur: 1500; delay: 333; easing: linear; loop: false")
+          setTimeout(() => {
+            el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 2500; easing: linear; loop: false")
+          }, 333)
+          // Update label
+          document.getElementById('collectedText').setAttribute('value', "Collected " + numCollected.toString() + "/" + totalToCollect.toString())
+        }
+        // Collected All state
+        if (slots.length === 0) {
+            document.getElementById('collectedAll').setAttribute('visible', 'true');
+            document.getElementById('plane').setAttribute('visible', 'true');
+            document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 30; dur: 20000; easing: linear; loop: false")
+            el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 250; easing: linear; loop: false")
+        }
+      });
+
+      el.addEventListener('mouseleave', function () {
+        el.setAttribute('color', defaultColor);
+        let scale = el.getAttribute('scale')
+        let newScale = scale.x * 0.71 + " " + scale.y * 0.71 + " " + scale.z * 0.71
+        el.setAttribute('scale', newScale)
+        if (slots.length === 0 && !readyToBoot) {
+          setTimeout(() => {
+            readyToBoot = true;
+          }, 888)
+        }
+        // Collected All state
+        if (readyToBoot) {
+          // if (getRand(1, 10) <= 10) {
+            // Randomly boot one out of there for fun
+            el.setAttribute('animation__position', "property: position; to: " + getRand(-35, 35) + " " + getRand(-296, -50) + " -1000; dur: 2500; delay: 366; easing: linear; loop: false")
+          // }
+        }
+      });
+    }
+  });
+</script>
+<style>
+
+</style>
+<body>
+  <a-scene embedded vr-mode-ui="enabled: false">
+    <a-plane color="blue" id="plane" height="40" width="80" position="7 0 -35" visible="false" opacity="0.6" animation__position="property: position; to: 7 0 -45; delay: 20000; dur: 50000; easing: linear; loop: false"></a-plane>
+    <a-text id="collectedText" value="Collected" position="-7 8.5 -13"  height="55px" width="40px"></a-text>
+    <a-text id="collectedAll" visible="false" color="white" value="You collected all boxes!" position="1 0 -15" height="50px" width="50px"></a-text>
+    <a-box model-move="location: collection" scale="1.5 1.5 1.5" position="-10 -5 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="-10 5 -12"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 0 14 -6; dur: 42000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 1500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="-10 -2 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -66 14 25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 270 0; dur: 500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="-10 2 -12"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 6 -4 25; dur: 22000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 2500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="-10 5 -12"  rotation="0 90 0"  animation-mixer animation__position="property: position; to: 66 14 -5; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 0; dur: 3500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 1 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -33 14 -25; dur: 12000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 270 0; dur: 500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 2 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -6 4 -25; dur: 22000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 90 0; dur: 500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 4 -12"  rotation="0 270 90"  animation-mixer animation__position="property: position; to: -66 14 -5; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 90 0; dur: 2500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -99 14 -25; dur: 42000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 90 0; dur: 3500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="90 270 0"  animation-mixer animation__position="property: position; to: -9 14 25; dur: 42000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 90 0; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: 99 14 25; dur: 42000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 90 0; dur: 5500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="270 0 0"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 42000; easing: linear; loop: true" animation__rotation="property: rotation; to: 90 0 0; dur: 6500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 270 0"  animation-mixer animation__position="property: position; to: -9 14 25; dur: 42000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 90 0; dur: 7500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 0 90; dur: 500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 0 90; dur: 500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="270 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 0 90; dur: 500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 90 0 90; dur: 2500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 270 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 0 90; dur: 500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 90 0 90; dur: 2500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="270 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 90 90; dur: 500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box  model-move="location: collection" scale="1.5 1.5 1.5" position="10 5 -12"  rotation="0 0 270"  animation-mixer animation__position="property: position; to: -99 1 25; dur: 52000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 0 90; dur: 2500; easing: linear; loop: true" collected="false"> </a-box>
+
+    <a-camera id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40"><a-cursor></a-cursor></a-camera>
+  </a-scene>
+</body>
