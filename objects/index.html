@@ -61,8 +61,8 @@ Colors.random = function() {
       var data = this.data;
       var el = this.el;  // <a-box>
 
-      el.setAttribute('position', getRand(-45, 45) + " " + getRand(-75, 75) + " " + getRand(-30, 50))
-      el.setAttribute('animation__position', "property: position; to: " + getRand(-30, 30) + " " + getRand(-10, 10) + " " + getRand(-20, 10) + "; dur: 32000; easing: linear; loop: false")
+      el.setAttribute('position', getRand(-10, -1) + " " + getRand(-7, 7) + " " + getRand(-25, -5))
+      el.setAttribute('animation__position', "property: position; to: " + getRand(-6, -1) + " " + getRand(-2, 2) + " " + getRand(-20, -2) + "; dur: 5000; easing: linear; loop: false")
       var defaultColor = Colors.random()
       el.setAttribute('color', defaultColor)
 
