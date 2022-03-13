@@ -49,9 +49,21 @@ Colors.random = function() {
    return Math.floor(Math.random() * (max - min + 1)) + min
  }
 
-    let slots = ["-5 10 -20", "-5 6 -20", "-5 2 -20", "-5 -2 -20", "-5 -6 -20", "-5 -10 -20", "-5 -14 -20", 
-    "-1 10 -20", "-1 6 -20", "-1 2 -20", "-1 -2 -20", "-1 -6 -20", "-1 -10 -20", "-1 -14 -20", 
-    "3 10 -20", "3, 6, -20", "3, 2, -20", "3 -2 -20", "3 -6 -20", "3 -10 -20", "3 -14 -20"]
+ function getRandExcluded(min, max, excludedMin, excludedMax) {
+   let someRand = Math.floor(Math.random() * (max - min + 1)) + min
+   if (excludedMin <= min || excludedMax >= max) {
+     return null
+   }
+   while (someRand >= excludedMin && someRand <= excludedMax) {
+      // this rand is within our excluded, try a new one
+      someRand = Math.floor(Math.random() * (max - min + 1)) + min
+   }
+   return someRand
+ }
+
+    let slots = ["-5 10 -25", "-5 6 -25", "-5 2 -25", "-5 -2 -25", "-5 -6 -25", "-5 -10 -25", "-5 -14 -25", 
+    "-1 10 -25", "-1 6 -25", "-1 2 -25", "-1 -2 -25", "-1 -6 -25", "-1 -10 -25", "-1 -14 -25", 
+    "3 10 -25", "3, 6, -25", "3, 2, -25", "3 -2 -25", "3 -6 -25", "3 -10 -25", "3 -14 -25"]
     const totalToCollect = 21
     let numCollected = 0
     var readyToBoot = false;
@@ -61,14 +73,15 @@ Colors.random = function() {
       var data = this.data;
       var el = this.el;  // <a-box>
 
-      el.setAttribute('position', getRand(-155, 155) + " " + getRand(-155, 155) + " " + getRand(-40, -5))
-      el.setAttribute('animation__position', "property: position; to: " + getRand(-50, 50) + " " + getRand(-14, 14) + " " + getRand(-15, -6) + "; dur: 35000; easing: linear; loop: false")
+      el.setAttribute('position', getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-95, 25, -2, 2))
+      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-80, 80. -7, 5) + " " + getRandExcluded(-14, 14, -16, 12) + " " + getRandExcluded(-55, 15, -2, 2) + "; dur: 35000; easing: linear; loop: false")
       var defaultColor = Colors.random()
       el.setAttribute('color', defaultColor)
 
       el.addEventListener('mouseenter', function () {
         console.log(el.getAttribute('animation__rotation'))
         el.setAttribute('color', 'yellow');
+        document.getElementById('cursor').setAttribute('color', 'yellow')
         console.log('collected object')
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 2 + " " + scale.y * 2 + " " + scale.z * 2
@@ -77,11 +90,12 @@ Colors.random = function() {
         if (el.getAttribute('collected') === 'false') {
           el.setAttribute('collected', 'true')
           numCollected++
+          el.setAttribute('scale', "0.5 0.5 0.5")
           // Animate to Collection
           let nextOpenSlot = slots.shift()
           el.setAttribute('animation__position', "property: position; to: " + nextOpenSlot + "; dur: 1500; delay: 333; easing: linear; loop: false")
           setTimeout(() => {
-            el.setAttribute('animation__rotation', "property: rotation; to: 45 45 45; dur: 3500; easing: linear; loop: false")
+            el.setAttribute('animation__rotation', "property: rotation; to: 25 25 25; dur: 3500; easing: linear; loop: false")
           }, 333)
           // Update label
           document.getElementById('collectedText').setAttribute('value', "Collected " + numCollected.toString() + "/" + totalToCollect.toString())
@@ -109,6 +123,7 @@ Colors.random = function() {
 
       el.addEventListener('mouseleave', function () {
         el.setAttribute('color', defaultColor);
+        document.getElementById('cursor').setAttribute('color', 'black')
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 0.5 + " " + scale.y * 0.5 + " " + scale.z * 0.5
         el.setAttribute('scale', newScale)
@@ -122,8 +137,8 @@ Colors.random = function() {
 <body>
   <a-scene embedded vr-mode-ui="enabled: false">
     <a-plane color="blue" id="plane" height="40" width="80" position="7 0 -35" visible="false" opacity="0.6" animation__position="property: position; to: 7 0 -45; delay: 20000; dur: 50000; easing: linear; loop: false"></a-plane>
-    <a-text id="collectedText" value="Collected" position="-14 14 -20"  height="55px" width="40px"></a-text>
-    <a-text id="collectedAll" visible="false" color="white" value="You collected all toast!" position="1 0 -20" height="50px" width="50px"></a-text>
+    <a-text id="collectedText" value="Collected" position="-14 14 -25"  height="55px" width="40px"></a-text>
+    <a-text id="collectedAll" visible="false" color="white" value="You collected all toast!" position="1 0 -25" height="50px" width="50px"></a-text>
     <a-obj-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.obj" mtl="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.mtl" model-move="location: collection" scale="0.5 0.5 0.5"  rotation="0 0 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-obj-model>
     <a-obj-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.obj" mtl="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.mtl" model-move="location: collection" scale="0.5 0.5 0.5"  rotation="0 0 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 360 360 360; dur: 2500; easing: easeInElastic; loop: true" collected="false"> </a-obj-model>
     <a-obj-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toaster/toaster.obj" mtl="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toaster/toaster.mtl" model-move="location: collection" scale="0.35 0.35 0.35"  rotation="0 0 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 360 360 360; dur: 2500; easing: easeInBack; loop: true" collected="false"> </a-obj-model>
@@ -146,6 +161,6 @@ Colors.random = function() {
     <a-obj-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.obj" mtl="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.mtl" model-move="location: collection" scale="1.7 1.7 1.7" rotation="0 0 270"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 360 360 270; dur: 7500; easing: linear; loop: true" collected="false"> </a-obj-model>
     <a-obj-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.obj" mtl="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.mtl" model-move="location: collection" scale="0.7 0.7 0.7" rotation="0 0 270"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 0 360 270; dur: 4500; easing: linear; loop: true" collected="false"> </a-obj-model>
 
-    <a-camera id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40"><a-cursor></a-cursor></a-camera>
+    <a-camera id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40"><a-cursor id="cursor"></a-cursor></a-camera>
   </a-scene>
 </body>
