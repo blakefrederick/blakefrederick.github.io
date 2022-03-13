@@ -49,9 +49,9 @@ Colors.random = function() {
    return Math.floor(Math.random() * (max - min + 1)) + min
  }
 
-    let slots = ["-5 10 -15", "-5 6 -15", "-5 2 -15", "-5 -2 -15", "-5 -6 -15", "-5 -10 -15", "-5 -14 -15", 
-    "-1 10 -15", "-1 6 -15", "-1 2 -15", "-1 -2 -15", "-1 -6 -15", "-1 -10 -15", "-1 -14 -15", 
-    "3 10 -15", "3, 6, -15", "3, 2, -15", "3 -2 -15", "3 -6 -15", "3 -10 -15", "3 -14 -15"]
+    let slots = ["-5 10 -20", "-5 6 -20", "-5 2 -20", "-5 -2 -20", "-5 -6 -20", "-5 -10 -20", "-5 -14 -20", 
+    "-1 10 -20", "-1 6 -20", "-1 2 -20", "-1 -2 -20", "-1 -6 -20", "-1 -10 -20", "-1 -14 -20", 
+    "3 10 -20", "3, 6, -20", "3, 2, -20", "3 -2 -20", "3 -6 -20", "3 -10 -20", "3 -14 -20"]
     const totalToCollect = 21
     let numCollected = 0
     var readyToBoot = false;
@@ -122,8 +122,8 @@ Colors.random = function() {
 <body>
   <a-scene embedded vr-mode-ui="enabled: false">
     <a-plane color="blue" id="plane" height="40" width="80" position="7 0 -35" visible="false" opacity="0.6" animation__position="property: position; to: 7 0 -45; delay: 20000; dur: 50000; easing: linear; loop: false"></a-plane>
-    <a-text id="collectedText" value="Collected" position="-14 14 -15"  height="55px" width="40px"></a-text>
-    <a-text id="collectedAll" visible="false" color="white" value="You collected all toast!" position="1 0 -15" height="50px" width="50px"></a-text>
+    <a-text id="collectedText" value="Collected" position="-14 14 -20"  height="55px" width="40px"></a-text>
+    <a-text id="collectedAll" visible="false" color="white" value="You collected all toast!" position="1 0 -20" height="50px" width="50px"></a-text>
     <a-obj-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.obj" mtl="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.mtl" model-move="location: collection" scale="0.5 0.5 0.5"  rotation="0 0 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-obj-model>
     <a-obj-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.obj" mtl="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toast/toast.mtl" model-move="location: collection" scale="0.5 0.5 0.5"  rotation="0 0 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 360 360 360; dur: 2500; easing: easeInElastic; loop: true" collected="false"> </a-obj-model>
     <a-obj-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toaster/toaster.obj" mtl="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/gltf/toaster/toaster.mtl" model-move="location: collection" scale="0.35 0.35 0.35"  rotation="0 0 0"  animation-mixer animation__position="property: position; to: -66 14 -25; dur: 32000; easing: linear; loop: true" animation__rotation="property: rotation; to: 360 360 360; dur: 2500; easing: easeInBack; loop: true" collected="false"> </a-obj-model>
