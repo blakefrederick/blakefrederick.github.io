@@ -90,12 +90,12 @@ Colors.random = function() {
         if (el.getAttribute('collected') === 'false') {
           el.setAttribute('collected', 'true')
           numCollected++
-          el.setAttribute('scale', "0.5 0.5 0.5")
           // Animate to Collection
           let nextOpenSlot = slots.shift()
           el.setAttribute('animation__position', "property: position; to: " + nextOpenSlot + "; dur: 1500; delay: 333; easing: linear; loop: false")
           setTimeout(() => {
             el.setAttribute('animation__rotation', "property: rotation; to: 25 25 25; dur: 3500; easing: linear; loop: false")
+            el.setAttribute('scale', "0.5 0.5 0.5")
           }, 333)
           // Update label
           document.getElementById('collectedText').setAttribute('value', "Collected " + numCollected.toString() + "/" + totalToCollect.toString())
