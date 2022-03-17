@@ -68,16 +68,16 @@ Colors.random = function() {
   let slots = ["-5 10 -25", "-5 6 -25", "-5 2 -25", "-5 -2 -25", "-5 -6 -25", "-5 -10 -25", "-5 -14 -25", "-1 10 -25"]
   const totalToCollect = document.getElementsByClassName('collectable').length
   let numCollected = 0
-  let readyToBoot = false;
+  let readyToBoot = false
 
   AFRAME.registerComponent('model-move', {
     init: function () {
-      let data = this.data;
-      let el = this.el;  // <a-box>
+      let data = this.data
+      let el = this.el
 
       // Determine where the objects start and how they move around the space, randomly
       el.setAttribute('position', getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-95, 25, -2, 2))
-      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-80, 80. -7, 7) + " " + getRandExcluded(-25, 25, -4, 4) + " " + getRandExcluded(-65, -5, -2, 2) + "; dur: 10000; easing: linear; loop: false")
+      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-80, 80. -7, 7) + " " + getRandExcluded(-25, 25, -4, 4) + " " + getRandExcluded(-65, -5, -5, 8) + "; dur: 5000; easing: linear; loop: false")
       
       // Assign colours (for primitive objects like box, sphere)
       let defaultColor = Colors.random()
@@ -93,10 +93,15 @@ Colors.random = function() {
         // Increase scale to add UI feedback
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 2 + " " + scale.y * 2 + " " + scale.z * 2
-        el.setAttribute('scale', newScale);
+        el.setAttribute('scale', newScale)
 
         // Collected a New One
         if (el.getAttribute('collected') === 'false') {
+
+          // get the cameras world direction
+          var position = document.querySelector('a-scene').camera.el.object3D.position; 
+          // get the current position
+          console.log(position)
           
           // Mark as collected
           console.log('collected object')
@@ -105,16 +110,16 @@ Colors.random = function() {
           
           // Mark as collected in the HUD
           var modelId = el.getAttribute('id')
-          document.querySelector('.' + modelId + ' .checkmark').style.display = "block"
-          document.getElementsByClassName('instructions')[0].innerHTML = 'Collected a new item!'
+          document.getElementsByClassName('notification')[0].innerHTML = 'Collected a new item!'
           setTimeout(() => {
-            document.getElementsByClassName('instructions')[0].innerHTML = ''
+            document.getElementsByClassName('notification')[0].innerHTML = ''
+            document.querySelector('.' + modelId + ' .checkmark').style.display = "block"
           }, 2500)
           
           // Animate forward then away
-          el.setAttribute('animation__position', "property: position; to: 0 -2 -5; dur: 2000; delay: 333; easing: linear; loop: false")
+          el.setAttribute('animation__position', "property: position; to: 0 0 -15; dur: 2000; delay: 333; easing: linear; loop: false")
           setTimeout(() => {
-            el.setAttribute('animation__position', "property: position; to: 0 0 -1000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
+            el.setAttribute('animation__position', "property: position; to: 0 0 -2000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
           }, 2500)
         }
 
@@ -139,7 +144,7 @@ Colors.random = function() {
 </script>
 <style>
   .hud {
-    height: 250px;
+
     width: 100%;
     z-index: 99;
     position: absolute;
@@ -156,12 +161,18 @@ Colors.random = function() {
   .phone {
     display: none;
   }
+  .notification {
+    font-family: arial;
+    font-size: 26px;
+    color: red;
+  }
   .instructions {
     text-transform: uppercase;
     background: red;
     color: white;
   }
   .collectables {
+    height: 205px;
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -175,7 +186,7 @@ Colors.random = function() {
     display: none;
     position: absolute;
     width: 87px;
-    top: 20px;
+    top: 22px;
   }
   img {
     max-width: 100%;
@@ -196,12 +207,13 @@ Colors.random = function() {
     <a-gltf-model id="spkorange" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-orange_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-gltf-model id="spkred" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-red_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-gltf-model id="spkyellow" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-yellow_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-camera id="camera"><a-cursor id="cursor"></a-cursor></a-camera>
+    <a-camera id="camera" position="0 0 10"><a-cursor id="cursor"></a-cursor></a-camera>
   </a-scene>
+  <div class="phone">
+    <input type="phone"></input>
+  </div>
+
   <div class="hud">
-    <div class="phone">
-      <input type="phone"></input>
-    </div>
     <div class="notification">
     </div>
     <div class="instructions">
