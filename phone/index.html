@@ -86,22 +86,17 @@ Colors.random = function() {
       // Actions taken when object is focussed upon
       el.addEventListener('mouseenter', function () {
 
-        // Highlight the cursor while focussing
-        el.setAttribute('color', 'yellow');
-        document.getElementById('cursor').setAttribute('color', 'yellow')
-
-        // Increase scale to add UI feedback
-        let scale = el.getAttribute('scale')
-        let newScale = scale.x * 2 + " " + scale.y * 2 + " " + scale.z * 2
-        el.setAttribute('scale', newScale)
-
         // Collected a New One
         if (el.getAttribute('collected') === 'false') {
 
-          // get the cameras world direction
-          var position = document.querySelector('a-scene').camera.el.object3D.position; 
-          // get the current position
-          console.log(position)
+          // Highlight the cursor while focussing
+          el.setAttribute('color', 'yellow');
+          document.getElementById('cursor').setAttribute('color', 'yellow')
+
+          // Increase scale to add UI feedback
+          let scale = el.getAttribute('scale')
+          let newScale = scale.x * 2 + " " + scale.y * 2 + " " + scale.z * 2
+          el.setAttribute('scale', newScale)
           
           // Mark as collected
           console.log('collected object')
@@ -111,15 +106,15 @@ Colors.random = function() {
           // Mark as collected in the HUD
           var modelId = el.getAttribute('id')
           document.getElementsByClassName('notification')[0].innerHTML = 'Collected a new item!'
+          document.querySelector('.' + modelId + ' .checkmark').style.display = "block"
           setTimeout(() => {
             document.getElementsByClassName('notification')[0].innerHTML = ''
-            document.querySelector('.' + modelId + ' .checkmark').style.display = "block"
           }, 2500)
           
           // Animate forward then away
-          el.setAttribute('animation__position', "property: position; to: 0 0 -15; dur: 2000; delay: 333; easing: linear; loop: false")
+          el.setAttribute('animation__position', "property: position; to: 0 -2 -15; dur: 2000; delay: 333; easing: linear; loop: false")
           setTimeout(() => {
-            el.setAttribute('animation__position', "property: position; to: 0 0 -2000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
+            el.setAttribute('animation__position', "property: position; to: 0 -20 -2000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
           }, 2500)
         }
 
@@ -143,8 +138,10 @@ Colors.random = function() {
   });
 </script>
 <style>
+  body {
+    font-family: arial;
+  }
   .hud {
-
     width: 100%;
     z-index: 99;
     position: absolute;
@@ -162,7 +159,6 @@ Colors.random = function() {
     display: none;
   }
   .notification {
-    font-family: arial;
     font-size: 26px;
     color: red;
   }
@@ -181,12 +177,13 @@ Colors.random = function() {
   .imgWrap {
     max-width: 87px;
     border: 3px red solid;
+    position: relative;
   }
   .checkmark {
     display: none;
     position: absolute;
     width: 87px;
-    top: 22px;
+    top: 3px;
   }
   img {
     max-width: 100%;
