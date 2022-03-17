@@ -119,14 +119,17 @@ Colors.random = function() {
         }
 
         console.log("numCollected", numCollected)
-        console.log("totalToCollect", totalToCollect)
 
         // All objects collected, celebrate
         if (numCollected === totalToCollect) {
           document.getElementById('collectedAll').setAttribute('visible', 'true');
-          document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 60; dur: 50000; easing: linear; loop: false")
+          document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 70; dur: 75000; easing: linear; loop: false")
           document.querySelector('#phone').style.display = "block";
           document.querySelector('#turn').setAttribute('visible', 'false');
+          setTimeout(() => {
+            document.querySelector('#six12logonocollect').setAttribute('rotation', '0 0 0')
+            document.querySelector('#developedBy').setAttribute('rotation', '0 0 0')
+          }, 45000)
         }
       });
 
@@ -208,9 +211,9 @@ Colors.random = function() {
 </head>
 <body>
   <a-scene wasd-controls embedded vr-mode-ui="enabled: false" renderer="antialias: false; logarithmicDepthBuffer:true; precision: mediump; alpha: true; colorManagement: true;">
-    <a-plane color="blue" id="plane" height="400" width="400" position="0 0 35" visible="true" opacity="0.6"></a-plane>
-    <a-text id="collectedText" value="Developed by" position="0 8 45" rotation="0 180 0" height="45px" width="35px" color="white"></a-text>
-    <a-gltf-model id="six12logo2" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" position="-5 2 45" rotation="0 180 0" scale="7 7 7"> </a-gltf-model>
+    <a-plane color="darkblue" id="plane" height="400" width="400" position="0 0 35" visible="true" opacity="0.6"></a-plane>
+    <a-text id="developedBy" value="Developed by" position="0 8 45" rotation="0 180 0" height="45px" width="35px" color="white"></a-text>
+    <a-gltf-model id="six12logonocollect" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" position="-5 2 45" rotation="0 180 0" scale="7 7 7"> </a-gltf-model>
     <a-text id="turn" value="Turn around" position="-5 -1 45" rotation="0 180 0" height="85px" width="50px" color="white" visible="true"></a-text>
     <a-entity light="type: directional; color: #EEE; intensity: 2.5" position="10 5 -5"></a-entity>
     <a-entity light="type: directional; color: #EEE; intensity: 3.5" position="-10 -2 15"></a-entity>
