@@ -106,9 +106,9 @@ Colors.random = function() {
           // Mark as collected in the HUD
           var modelId = el.getAttribute('id')
           document.querySelector('.' + modelId + ' .checkmark').style.display = "block"
-          document.getElementsByClassName('instructions').innerHTML = 'Collected a new item!'
+          document.getElementsByClassName('instructions')[0].innerHTML = 'Collected a new item!'
           setTimeout(() => {
-            document.getElementsByClassName('instructions').innerHTML = ''
+            document.getElementsByClassName('instructions')[0].innerHTML = ''
           }, 2500)
           
           // Animate forward then away
@@ -123,6 +123,7 @@ Colors.random = function() {
           document.getElementById('collectedAll').setAttribute('visible', 'true');
           document.getElementById('plane').setAttribute('visible', 'true');
           document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 30; dur: 20000; easing: linear; loop: false")
+          document.getElementsByClassName('phone')[0].style.display = "block";
         }
       });
 
@@ -151,6 +152,9 @@ Colors.random = function() {
     overflow: hidden;
     background: white;
     opacity: 0.9;
+  }
+  .phone {
+    display: none;
   }
   .instructions {
     text-transform: uppercase;
@@ -195,8 +199,10 @@ Colors.random = function() {
     <a-camera id="camera"><a-cursor id="cursor"></a-cursor></a-camera>
   </a-scene>
   <div class="hud">
+    <div class="phone">
+      <input type="phone"></input>
+    </div>
     <div class="notification">
-
     </div>
     <div class="instructions">
       Collect All to Win!
