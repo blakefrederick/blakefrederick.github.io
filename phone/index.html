@@ -76,8 +76,8 @@ Colors.random = function() {
       let el = this.el
 
       // Determine where the objects start and how they move around the space, randomly
-      el.setAttribute('position', getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-95, 25, -2, 2))
-      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-80, 80. -2, 2) + " " + getRandExcluded(-25, 25, -1, 1) + " " + getRandExcluded(-65, -5, -20, -13) + "; dur: 20000; easing: linear; loop: false")
+      el.setAttribute('position', getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-55, 25, -2, 2))
+      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-100, 100. -2, 2) + " " + getRandExcluded(-20, 20, -1, 1) + " " + getRandExcluded(-25, -3, -20, -13) + "; dur: 20000; easing: linear; loop: false")
       
       // Assign colours (for primitive objects like box, sphere)
       let defaultColor = Colors.random()
@@ -112,10 +112,10 @@ Colors.random = function() {
           }, 2500)
           
           // Animate forward then away
-          el.setAttribute('animation__position', "property: position; to: 0 -5 -15; dur: 2000; delay: 333; easing: linear; loop: false")
+          el.setAttribute('animation__position', "property: position; to: -3 -10 -15; dur: 500; delay: 333; easing: linear; loop: false")
           setTimeout(() => {
-            el.setAttribute('animation__position', "property: position; to: 0 -20 -2000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
-          }, 2500)
+            el.setAttribute('animation__position', "property: position; to: -3 -20 -2000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
+          }, 500)
         }
 
         console.log("numCollected", numCollected)
