@@ -136,7 +136,39 @@ Colors.random = function() {
   });
 </script>
 <style>
-
+  .hud {
+    height: 250px;
+    width: 100%;
+    z-index: 99;
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;
+    text-align: center;
+    /* Hide superfluous border */
+    overflow: hidden;
+    background: white;
+    opacity: 0.9;
+  }
+  .instructions {
+    text-transform: uppercase;
+    background: red;
+    color: white;
+  }
+  .collectables {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 375px;
+  }
+  .imgWrap {
+    max-width: 87px;
+    border: 3px red solid;
+  }
+  img {
+    max-width: 100%;
+  }
 </style>
 </head>
 <body>
@@ -146,8 +178,8 @@ Colors.random = function() {
     <a-text id="collectedAll" visible="false" color="white" value="You collected everything!" position="1 0 -25" height="50px" width="50px"></a-text>
     <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/ck-store_0316a.glb" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/fuel-runner-hatchback_0315a.glb" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/raccoon_0316a.glb" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/raccoon_0316a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" scale="5 5 5" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-green_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-orange_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-red_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
@@ -156,5 +188,36 @@ Colors.random = function() {
     <a-gltf-model src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-yellow_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-camera id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40"><a-cursor id="cursor"></a-cursor></a-camera>
   </a-scene>
+  <div class="hud">
+    <div class="instructions">
+      Collect All to Win!
+    </div>
+    <div class="collectables">
+      <div class="imgWrap">
+        <img src="/assets/img/ck-store_0316a.png" alt="CK Store"/>
+      </div>
+      <div class="imgWrap">
+        <img src="/assets/img/ck-raccoon_0316a.png" alt="CK Store"/>
+      </div>
+      <div class="imgWrap">
+        <img src="/assets/img/ck-car_0316a.png" alt="CK Store"/>
+      </div>
+      <div class="imgWrap">
+        <img src="/assets/img/six12-logo_0316a.png" alt="CK Store"/>
+      </div>
+      <div class="imgWrap">
+        <img src="/assets/img/spk-green_0316a.png" alt="CK Store"/>
+      </div>
+      <div class="imgWrap">
+        <img src="/assets/img/spk-orange_0316a.png" alt="CK Store"/>
+      </div>
+      <div class="imgWrap">
+        <img src="/assets/img/spk-red_0316a.png" alt="CK Store"/>
+      </div>
+      <div class="imgWrap">
+        <img src="/assets/img/spk-yellow_0316a.png" alt="CK Store"/>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
