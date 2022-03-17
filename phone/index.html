@@ -76,8 +76,8 @@ Colors.random = function() {
       let el = this.el
 
       // Determine where the objects start and how they move around the space, randomly
-      el.setAttribute('position', getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-55, 25, -2, 2))
-      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-100, 100. -4, 4) + " " + getRandExcluded(-20, 20, -3, 3) + " " + getRandExcluded(-25, -8, -20, -13) + "; dur: 20000; easing: linear; loop: false")
+      el.setAttribute('position', getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-75, -25, -8, 8))
+      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-100, 100. -8, 8) + " " + getRandExcluded(-20, 20, -8, 8) + " " + getRandExcluded(-25, -8, -20, -13) + "; dur: 20000; easing: linear; loop: false")
       
       // Assign colours (for primitive objects like box, sphere)
       let defaultColor = Colors.random()
