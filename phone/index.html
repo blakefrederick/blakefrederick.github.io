@@ -65,74 +65,64 @@ Colors.random = function() {
    return someRand
  }
 
-  let slots = ["-5 10 -25", "-5 6 -25", "-5 2 -25", "-5 -2 -25", "-5 -6 -25", "-5 -10 -25", "-5 -14 -25", 
-  "-1 10 -25", "-1 6 -25", "-1 2 -25", "-1 -2 -25", "-1 -6 -25", "-1 -10 -25", "-1 -14 -25", 
-  "3 10 -25", "3, 6, -25", "3, 2, -25", "3 -2 -25", "3 -6 -25", "3 -10 -25", "3 -14 -25"]
-  const totalToCollect = 8
+  let slots = ["-5 10 -25", "-5 6 -25", "-5 2 -25", "-5 -2 -25", "-5 -6 -25", "-5 -10 -25", "-5 -14 -25", "-1 10 -25"]
+  const totalToCollect = document.getElementsByClassName('collectable').length
   let numCollected = 0
-  var readyToBoot = false;
+  let readyToBoot = false;
 
   AFRAME.registerComponent('model-move', {
     init: function () {
-      var data = this.data;
-      var el = this.el;  // <a-box>
+      let data = this.data;
+      let el = this.el;  // <a-box>
 
       // Determine where the objects start and how they move around the space, randomly
       el.setAttribute('position', getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-95, 25, -2, 2))
       el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-80, 80. -7, 7) + " " + getRandExcluded(-25, 25, -4, 4) + " " + getRandExcluded(-65, -5, -2, 2) + "; dur: 10000; easing: linear; loop: false")
       
       // Assign colours (for primitive objects like box, sphere)
-      var defaultColor = Colors.random()
+      let defaultColor = Colors.random()
       el.setAttribute('color', defaultColor)
 
       // Actions taken when object is focussed upon
       el.addEventListener('mouseenter', function () {
-        console.log(el.getAttribute('animation__rotation'))
+
+        // Highlight the cursor while focussing
         el.setAttribute('color', 'yellow');
         document.getElementById('cursor').setAttribute('color', 'yellow')
-        console.log('collected object')
+
+        // Increase scale to add UI feedback
         let scale = el.getAttribute('scale')
         let newScale = scale.x * 2 + " " + scale.y * 2 + " " + scale.z * 2
         el.setAttribute('scale', newScale);
 
         // Collected a New One
         if (el.getAttribute('collected') === 'false') {
+          
           // Mark as collected
+          console.log('collected object')
           el.setAttribute('collected', 'true')
           numCollected++
+          
           // Mark as collected in the HUD
           var modelId = el.getAttribute('id')
-
           document.querySelector('.' + modelId + ' .checkmark').style.display = "block"
-          // Animate to Collection
-          let nextOpenSlot = slots.shift()
-          el.setAttribute('animation__position', "property: position; to: " + nextOpenSlot + "; dur: 1500; delay: 333; easing: linear; loop: false")
+          document.getElementsByClassName('instructions').innerHTML = 'Collected a new item!'
           setTimeout(() => {
-            el.setAttribute('animation__rotation', "property: rotation; to: 0 0 0; dur: 3500; easing: linear; loop: false")
-            // el.setAttribute('scale', "0.5 0.5 0.5")
-          }, 333)
-          // Update label
-          document.getElementById('collectedText').setAttribute('value', "Collected " + numCollected.toString() + "/" + totalToCollect.toString())
+            document.getElementsByClassName('instructions').innerHTML = ''
+          }, 2500)
+          
+          // Animate forward then away
+          el.setAttribute('animation__position', "property: position; to: 0 -2 -5; dur: 2000; delay: 333; easing: linear; loop: false")
+          setTimeout(() => {
+            el.setAttribute('animation__position', "property: position; to: 0 0 -1000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
+          }, 2500)
         }
 
-        // Collected All state
-        if (slots.length === 0) {
-            document.getElementById('collectedAll').setAttribute('visible', 'true');
-            document.getElementById('plane').setAttribute('visible', 'true');
-            document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 30; dur: 20000; easing: linear; loop: false")
-            // el.setAttribute('animation__rotation', "property: rotation; to: 180 90 180; dur: 250; easing: linear; loop: false")
-        }
-        if (slots.length === 0 && !readyToBoot) {
-          setTimeout(() => {
-            readyToBoot = true;
-          }, 888)
-        }
-        // Collected All state
-        if (readyToBoot) {
-          // if (getRand(1, 10) <= 10) {
-            // Randomly boot one out of there for fun
-            el.setAttribute('animation__position', "property: position; to: " + getRand(-35, 35) + " " + getRand(-446, -50) + " -1000; dur: 31500; delay: 366; easing: easeOutElastic; loop: false")
-          // }
+        // All objects collected, celebrate
+        if (numCollected === totalToCollect) {
+          document.getElementById('collectedAll').setAttribute('visible', 'true');
+          document.getElementById('plane').setAttribute('visible', 'true');
+          document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 30; dur: 20000; easing: linear; loop: false")
         }
       });
 
@@ -192,19 +182,22 @@ Colors.random = function() {
 <body>
   <a-scene embedded vr-mode-ui="enabled: false" renderer="antialias: false; logarithmicDepthBuffer:true; precision: mediump; alpha: true; colorManagement: true;">
     <a-plane color="blue" id="plane" height="40" width="80" position="7 0 -35" visible="false" opacity="0.6" animation__position="property: position; to: 7 0 -45; delay: 20000; dur: 50000; easing: linear; loop: false"></a-plane>
-    <a-text id="collectedText" value="Collected" position="-14 14 -25"  height="55px" width="40px"></a-text>
+    <a-text id="collectedText" value="Turn around" position="0 6 15"  height="55px" width="40px"></a-text>
     <a-text id="collectedAll" visible="false" color="white" value="You collected everything!" position="1 0 -25" height="50px" width="50px"></a-text>
-    <a-gltf-model id="ckstore" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/ck-store_0316a.glb" scale="0.7 0.7 0.7" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model id="ckcar" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/fuel-runner-hatchback_0315a.glb" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model id="ckraccoon" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/raccoon_0316a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model id="six12logo" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" scale="7 7 7" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model id="spkgreen" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-green_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model id="spkorange" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-orange_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model id="spkred" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-red_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model id="spkyellow" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-yellow_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-camera id="camera" animation__position="property: position; to: 0 0 35; dur: 52000; easing: linear; loop: false" position="0 0 40"><a-cursor id="cursor"></a-cursor></a-camera>
+    <a-gltf-model id="ckstore" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/ck-store_0316a.glb" scale="0.7 0.7 0.7" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="ckcar" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/fuel-runner-hatchback_0315a.glb" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="ckraccoon" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/raccoon_0316a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="six12logo" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" scale="7 7 7" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="spkgreen" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-green_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="spkorange" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-orange_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="spkred" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-red_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="spkyellow" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-yellow_0315a.glb" scale="3 3 3" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-camera id="camera"><a-cursor id="cursor"></a-cursor></a-camera>
   </a-scene>
   <div class="hud">
+    <div class="notification">
+
+    </div>
     <div class="instructions">
       Collect All to Win!
     </div>
