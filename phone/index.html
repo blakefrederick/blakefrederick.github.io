@@ -76,8 +76,8 @@ Colors.random = function() {
       let el = this.el
 
       // Determine where the objects start and how they move around the space, randomly
-      el.setAttribute('position', getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-155, 155, -5, 5) + " " + getRand(-125, -25))
-      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-100, 100, -8, 8) + " " + getRandExcluded(-20, 20, -8, 8) + " " + getRand(-55, -20) + "; dur: 20000; easing: linear; loop: false")
+      el.setAttribute('position', getRandExcluded(-155, 155, -5, 5) + " " + getRandExcluded(-155, 155, -25, 25) + " " + getRand(-125, -25))
+      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-100, 100, -8, 8) + " " + getRandExcluded(-20, 20, -18, 18) + " " + getRand(-55, -20) + "; dur: 3000; easing: linear; loop: false")
       
       // Assign colours (for primitive objects like box, sphere)
       let defaultColor = Colors.random()
@@ -114,7 +114,7 @@ Colors.random = function() {
           // Animate forward then away
           el.setAttribute('animation__position', "property: position; to: -3 -10 -15; dur: 500; delay: 333; easing: linear; loop: false")
           setTimeout(() => {
-            el.setAttribute('animation__position', "property: position; to: -3 -20 -2000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
+            el.setAttribute('animation__position', "property: position; to: -3 -50 -2000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
           }, 500)
         }
 
@@ -218,11 +218,11 @@ Colors.random = function() {
     <a-gltf-model id="ckraccoon" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/raccoon_0316a.glb" scale="5 5 5" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-gltf-model id="six12logo" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" scale="7 7 7" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-entity light="type: directional; color: #EEE; intensity: 4.5" position="-1 10 -10">
-      <a-gltf-model id="spkgreen" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-green_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+      <a-gltf-model id="spkgreen" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-green_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 1500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     </a-entity>
-    <a-gltf-model id="spkorange" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-orange_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model id="spkred" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-red_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
-    <a-gltf-model id="spkyellow" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-yellow_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="spkorange" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-orange_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 0 360 360 to: 360 360 360; dur: 3500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="spkred" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-red_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 1500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="spkyellow" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-yellow_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-camera id="camera"><a-cursor id="cursor"></a-cursor></a-camera>
   </a-scene>
   <div id="phone">
