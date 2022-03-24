@@ -149,8 +149,15 @@ Colors.random = function() {
 
 
     <a-marker type='barcode' value='6'>
-      <a-box></a-box>
-    </a-marker>
+      <a-entity rotation="0 0 0" scale="0.2 0.2 0.2" animation="property: position; to: 0.04 2.02 -2.01; dur: 20000; easing: linear; loop: true">
+          <a-sphere id="sphere" position="0 0.35 -0.2" color="red"></a-sphere>
+      </a-entity>
+  </a-marker>
+    <a-marker type='barcode' value='7'>
+      <a-entity rotation="0 0 0" scale="0.4 0.4 0.4" animation="property: position; to: 0.04 2.02 -2.01; dur: 20000; easing: linear; loop: true">
+          <a-box id="box" position="0 0.35 -0.2" color="blue"></a-box>
+      </a-entity>
+  </a-marker>
 
     <a-camera id="camera"><a-cursor id="cursor"></a-cursor></a-camera>
   </a-scene>
