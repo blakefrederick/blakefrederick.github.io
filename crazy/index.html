@@ -1,0 +1,280 @@
+<html>
+<head>
+  <title>AR Collect + Phone Input Crazy Demo</title>
+
+<meta name="apple-mobile-web-app-capable" content="yes"> 
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+
+
+<script>
+
+Colors = {};
+Colors.names = {
+    aqua: "#00ffff",
+    azure: "#f0ffff",
+    beige: "#f5f5dc",
+    blue: "#0000ff",
+    brown: "#a52a2a",
+    cyan: "#00ffff",
+    darkblue: "#00008b",
+    darkcyan: "#008b8b",
+    darkorange: "#ff8c00",
+    darkorchid: "#9932cc",
+    darkred: "#8b0000",
+    darksalmon: "#e9967a",
+    darkviolet: "#9400d3",
+    fuchsia: "#ff00ff",
+      green: "#008000",
+    indigo: "#4b0082",
+    lime: "#00ff00",
+    magenta: "#ff00ff",
+    maroon: "#800000",
+    navy: "#000080",
+    orange: "#ffa500",
+    pink: "#ffc0cb",
+    purple: "#800080",
+    violet: "#800080",
+    red: "#ff0000",
+    silver: "#c0c0c0",
+};
+
+Colors.random = function() {
+    var result;
+    var count = 0;
+    for (var prop in this.names)
+        if (Math.random() < 1/++count)
+           result = prop;
+    return result;
+};
+
+ function getRand(min, max) {
+   return Math.floor(Math.random() * (max - min + 1)) + min
+ }
+
+ function getRandExcluded(min, max, excludedMin, excludedMax) {
+   let someRand = Math.floor(Math.random() * (max - min + 1)) + min
+   if (excludedMin <= min || excludedMax >= max) {
+     return null
+   }
+   while (someRand >= excludedMin && someRand <= excludedMax) {
+      // this rand is within our excluded, try a new one
+      someRand = Math.floor(Math.random() * (max - min + 1)) + min
+   }
+   return someRand
+ }
+
+
+ let slots = ["-5 10 -25", "-5 6 -25", "-5 2 -25", "-5 -2 -25", "-5 -6 -25", "-5 -10 -25", "-5 -14 -25", "-1 10 -25", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  let numCollected = 0
+  let readyToBoot = false
+
+  AFRAME.registerComponent('model-move', {
+    init: function () {
+      const totalToCollect = document.getElementsByClassName('collectable').length
+      let data = this.data
+      let el = this.el
+
+      // Determine where the objects start and how they move around the space, randomly
+      el.setAttribute('position', getRandExcluded(-355, 355, -5, 5) + " " + getRandExcluded(-255, 255, -25, 25) + " " + getRand(-225, 125))
+      el.setAttribute('animation__position', "property: position; to: " + getRandExcluded(-150, 150, -8, 8) + " " + getRandExcluded(-40, 40, -18, 18) + " " + getRand(-55, -2) + "; dur: 23000; easing: linear; loop: false")
+      // Assign colours (for primitive objects like box, sphere)
+      let defaultColor = Colors.random()
+      el.setAttribute('color', defaultColor)
+
+      // Actions taken when object is focussed upon
+      el.addEventListener('mouseenter', function () {
+
+        // Collected a New One
+        if (el.getAttribute('collected') === 'false') {
+
+          // Highlight the cursor while focussing
+          el.setAttribute('color', 'yellow');
+          document.getElementById('cursor').setAttribute('color', 'yellow')
+
+          // Increase scale to add UI feedback
+          let scale = el.getAttribute('scale')
+          let newScale = scale.x * 2 + " " + scale.y * 2 + " " + scale.z * 2
+          el.setAttribute('scale', newScale)
+          
+          // Mark as collected
+          console.log('collected object')
+          el.setAttribute('collected', 'true')
+          numCollected++
+          
+          // Mark as collected in the HUD
+          var modelId = el.getAttribute('id')
+          document.getElementsByClassName('notification')[0].innerHTML = 'Collected a new item!'
+          document.querySelector('.' + modelId + ' .checkmark').style.display = "block"
+          setTimeout(() => {
+            document.getElementsByClassName('notification')[0].innerHTML = ''
+          }, 2500)
+          
+          // Animate forward then away
+          el.setAttribute('animation__position', "property: position; to: -3 -10 -15; dur: 500; delay: 333; easing: linear; loop: false")
+          setTimeout(() => {
+            el.setAttribute('animation__position', "property: position; to: -3 -50 -2000; delay: 500; dur: 3500; easing: easeInSine; loop: false")
+          }, 500)
+        }
+
+        console.log("numCollected", numCollected)
+
+        // All objects collected, celebrate
+        if (numCollected === totalToCollect) {
+          document.getElementById('collectedAll').setAttribute('visible', 'true');
+          document.getElementById('camera').setAttribute('animation__position', "property: position; to: -2 0 70; dur: 75000; easing: linear; loop: false")
+          document.querySelector('#phone').style.display = "block";
+          document.querySelector('#turn').setAttribute('visible', 'false');
+          setTimeout(() => {
+            document.querySelector('#six12logonocollect').setAttribute('rotation', '0 0 0')
+            document.querySelector('#developedBy').setAttribute('rotation', '0 0 0')
+          }, 45000)
+        }
+      });
+
+      el.addEventListener('mouseleave', function () {
+        el.setAttribute('color', defaultColor);
+        document.getElementById('cursor').setAttribute('color', 'black')
+        let scale = el.getAttribute('scale')
+        let newScale = scale.x * 0.5 + " " + scale.y * 0.5 + " " + scale.z * 0.5
+        el.setAttribute('scale', newScale)
+      });
+    }
+  });
+</script>
+<style>
+  body {
+    font-family: arial;
+  }
+  .hud {
+    width: 100%;
+    z-index: 99;
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;
+    text-align: center;
+    /* Hide superfluous border */
+    overflow: hidden;
+    background: white;
+    opacity: 0.9;
+  }
+  #phone {
+    display: none;
+    width: 200px;
+    position: absolute;
+    top: 200px;
+    left: 41%;
+    text-align: center;
+    background: rgba(51, 170, 51, .7);
+    padding: 5%;
+  }
+  .phoneInstructions {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .notification {
+    font-size: 26px;
+    color: red;
+  }
+  .instructions {
+    text-transform: uppercase;
+    background: red;
+    color: white;
+  }
+  .collectables {
+    height: 205px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 375px;
+  }
+  .imgWrap {
+    max-width: 87px;
+    border: 3px red solid;
+    position: relative;
+  }
+  .checkmark {
+    display: none;
+    position: absolute;
+    width: 87px;
+    top: 3px;
+  }
+  img {
+    max-width: 100%;
+  }
+
+</style>
+</head>
+<body>
+  <a-scene wasd-controls embedded vr-mode-ui="enabled: false" renderer="antialias: false; logarithmicDepthBuffer:true; precision: mediump; alpha: true; colorManagement: true;">
+    <a-plane color="darkblue" id="plane" height="400" width="400" position="0 0 35" visible="true" opacity="0.6"></a-plane>
+    <a-text id="developedBy" value="Developed by" position="0 8 45" rotation="0 180 0" height="45px" width="35px" color="white"></a-text>
+    <a-gltf-model id="six12logonocollect" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" position="-5 2 45" rotation="0 180 0" scale="7 7 7"> </a-gltf-model>
+    <a-text id="turn" value="Turn around" position="-5 -1 45" rotation="0 180 0" height="85px" width="50px" color="white" visible="true"></a-text>
+    <a-entity light="type: directional; color: #EEE; intensity: 2.5" position="10 5 -5"></a-entity>
+    <a-entity light="type: directional; color: #EEE; intensity: 3.5" position="-10 -2 15"></a-entity>
+    <a-text id="collectedAll" visible="false" color="white" value="You collected everything!" position="1 0 -25" height="50px" width="50px"></a-text>
+    <a-gltf-model id="ckstore" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/ck-store_0316a.glb" scale="0.7 0.7 0.7" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="ckcar" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/fuel-runner-hatchback_0315a.glb" scale="2 2 2" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="ckraccoon" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/raccoon_0318a.glb" scale="5 5 5" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="six12logo" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" scale="7 7 7" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 2500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-entity light="type: directional; color: #EEE; intensity: 4.5" position="-1 10 -10">
+      <a-gltf-model id="spkgreen" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-green_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 1500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    </a-entity>
+    <a-gltf-model id="spkorange" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-orange_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 0 360 360 to: 360 360 360; dur: 3500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="spkred" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-red_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 1500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-gltf-model id="spkyellow" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-yellow_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-camera id="camera"><a-cursor id="cursor"></a-cursor></a-camera>
+  </a-scene>
+  <div id="phone">
+    <div class="phoneInstructions">Congrats!<br/>Now enter your phone number to save your collection <br/>(nothing happens yet)</div>
+    <input type="phone"></input>
+  </div>
+
+  <div class="hud">
+    <div class="notification">
+    </div>
+    <div class="instructions">
+      Collect All to Win!
+    </div>
+    <div class="collectables">
+      <div class="imgWrap ckstore">
+        <img class="modelImage" src="/assets/img/ck-store_0316a.png" alt="CK Store"/>
+        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
+      </div>
+      <div class="imgWrap ckraccoon">
+        <img class="modelImage" src="/assets/img/ck-raccoon_0316a.png" alt="CK Raccoon"/>
+        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
+      </div>
+      <div class="imgWrap ckcar">
+        <img class="modelImage" src="/assets/img/ck-car_0316a.png" alt="CK Car"/>
+        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
+      </div>
+      <div class="imgWrap six12logo">
+        <img class="modelImage" src="/assets/img/six12-logo_0316a.png" alt="SIX12 Logo"/>
+        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
+      </div>
+      <div class="imgWrap spkgreen">
+        <img src="/assets/img/spk-green_0316a.png" alt="CK Store"/>
+        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
+      </div>
+      <div class="imgWrap spkorange">
+        <img class="modelImage" src="/assets/img/spk-orange_0316a.png" alt="CK Store"/>
+        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
+      </div>
+      <div class="imgWrap spkred">
+        <img class="modelImage" src="/assets/img/spk-red_0316a.png" alt="CK Store"/>
+        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
+      </div>
+      <div class="imgWrap spkyellow">
+        <img class="modelImage" src="/assets/img/spk-yellow_0316a.png" alt="CK Store"/>
+        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
