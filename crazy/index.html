@@ -228,53 +228,23 @@ Colors.random = function() {
     <a-gltf-model id="spkorange" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-orange_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 0 360 360 to: 360 360 360; dur: 3500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-gltf-model id="spkred" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-red_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 0 360 to: 360 360 360; dur: 1500; easing: linear; loop: true" collected="false"> </a-gltf-model>
     <a-gltf-model id="spkyellow" class="collectable" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/spk-yellow_0315a.glb" scale="6 6 6" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-gltf-model>
+    <a-box color="purple" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="black" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="blue" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="white" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="orange" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="red" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="yellow" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="lightred" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="darkblue" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="green" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="lightgreen" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="grey" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
+    <a-box color="cyan" class="collectable" scale="1 1 1" model-move="location: collection" animation__position="" animation__rotation="property: rotation; from: 360 360 0 to: 360 360 360; dur: 4500; easing: linear; loop: true" collected="false"> </a-box>
     <a-camera id="camera"><a-cursor id="cursor"></a-cursor></a-camera>
   </a-scene>
-  <div id="phone">
-    <div class="phoneInstructions">Congrats!<br/>Now enter your phone number to save your collection <br/>(nothing happens yet)</div>
-    <input type="phone"></input>
-  </div>
 
-  <div class="hud">
-    <div class="notification">
-    </div>
-    <div class="instructions">
-      Collect All to Win!
-    </div>
-    <div class="collectables">
-      <div class="imgWrap ckstore">
-        <img class="modelImage" src="/assets/img/ck-store_0316a.png" alt="CK Store"/>
-        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
-      </div>
-      <div class="imgWrap ckraccoon">
-        <img class="modelImage" src="/assets/img/ck-raccoon_0316a.png" alt="CK Raccoon"/>
-        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
-      </div>
-      <div class="imgWrap ckcar">
-        <img class="modelImage" src="/assets/img/ck-car_0316a.png" alt="CK Car"/>
-        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
-      </div>
-      <div class="imgWrap six12logo">
-        <img class="modelImage" src="/assets/img/six12-logo_0316a.png" alt="SIX12 Logo"/>
-        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
-      </div>
-      <div class="imgWrap spkgreen">
-        <img src="/assets/img/spk-green_0316a.png" alt="CK Store"/>
-        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
-      </div>
-      <div class="imgWrap spkorange">
-        <img class="modelImage" src="/assets/img/spk-orange_0316a.png" alt="CK Store"/>
-        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
-      </div>
-      <div class="imgWrap spkred">
-        <img class="modelImage" src="/assets/img/spk-red_0316a.png" alt="CK Store"/>
-        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
-      </div>
-      <div class="imgWrap spkyellow">
-        <img class="modelImage" src="/assets/img/spk-yellow_0316a.png" alt="CK Store"/>
-        <img class="checkmark" src="/assets/img/checkmark_0316a.png" alt="Checkmark"/>
-      </div>
-    </div>
-  </div>
+
+
 </body>
 </html>
