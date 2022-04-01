@@ -138,7 +138,7 @@ Colors.random = function() {
 </style>
 </head>
 <body>
-  <a-scene wasd-controls embedded vr-mode-ui="enabled: false"  arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" renderer="antialias: false; logarithmicDepthBuffer:true; precision: mediump; alpha: true; colorManagement: true;">
+  <a-scene embedded vr-mode-ui="enabled: false"  arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" renderer="antialias: false; logarithmicDepthBuffer:true; precision: mediump; alpha: true; colorManagement: true;">
     <a-plane color="darkblue" id="plane" height="400" width="400" position="0 0 35" visible="true" opacity="0.6"></a-plane>
     <a-text id="developedBy" value="Developed by" position="0 8 45" rotation="0 180 0" height="45px" width="35px" color="white"></a-text>
     <a-gltf-model id="six12logonocollect" src="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/assets/models/six12-logo_0316a.glb" position="-5 2 45" rotation="0 180 0" scale="7 7 7"> </a-gltf-model>
