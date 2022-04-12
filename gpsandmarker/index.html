@@ -1,0 +1,186 @@
+<!doctype HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    </head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js">
+    // <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    
+    <script>
+
+Colors = {};
+Colors.names = {
+    aqua: "#00ffff",
+    azure: "#f0ffff",
+    beige: "#f5f5dc",
+    black: "#000000",
+    blue: "#0000ff",
+    brown: "#a52a2a",
+    cyan: "#00ffff",
+    darkblue: "#00008b",
+    darkcyan: "#008b8b",
+    darkgrey: "#a9a9a9",
+    darkgreen: "#006400",
+    darkkhaki: "#bdb76b",
+    darkmagenta: "#8b008b",
+    darkolivegreen: "#556b2f",
+    darkorange: "#ff8c00",
+    darkorchid: "#9932cc",
+    darkred: "#8b0000",
+    darksalmon: "#e9967a",
+    darkviolet: "#9400d3",
+    fuchsia: "#ff00ff",
+    gold: "#ffd700",
+    green: "#008000",
+    indigo: "#4b0082",
+    khaki: "#f0e68c",
+    lightblue: "#add8e6",
+    lightcyan: "#e0ffff",
+    lightgreen: "#90ee90",
+    lightgrey: "#d3d3d3",
+    lightpink: "#ffb6c1",
+    lightyellow: "#ffffe0",
+    lime: "#00ff00",
+    magenta: "#ff00ff",
+    maroon: "#800000",
+    navy: "#000080",
+    olive: "#808000",
+    orange: "#ffa500",
+    pink: "#ffc0cb",
+    purple: "#800080",
+    violet: "#800080",
+    red: "#ff0000",
+    silver: "#c0c0c0",
+    white: "#ffffff",
+    yellow: "#ffff00"
+};
+
+Colors.random = function() {
+    var result;
+    var count = 0;
+    for (var prop in this.names)
+        if (Math.random() < 1/++count)
+           result = prop;
+    return result;
+};
+      
+      function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+
+
+      setTimeout(() => {
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+
+        function success(pos) {
+          var crd = pos.coords;
+
+          console.log('Your current position is:');
+          console.log(`Latitude : ${crd.latitude}`);
+          console.log(`Longitude: ${crd.longitude}`);
+          console.log(`More or less ${crd.accuracy} meters.`);
+        }
+
+        function error(err) {
+          console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
+        let distanceMsg = document.querySelector('[gps-entity-place]').getAttribute('distanceMsg');
+        console.log(distanceMsg);   // "890 meters"
+
+
+      }, 4000)
+
+
+
+      </script>
+
+<style>
+
+
+</style>
+    <body class="animated" style='margin : 0px; overflow: hidden;'>
+
+          <!-- GPS models -->
+          <a-scene embedded vr-mode-ui="enabled: false" arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+            <!-- simulateLatitude="49.2694464" simulateLongitude="-123.0598674" -->
+            <a-camera gps-camera rotation-reader position="0 0 -10"></a-camera>
+            <!-- ck langley -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="1 0 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="latitude: 49.16275788178612; longitude: -122.63911809729908;" animation-mixer></a-entity> 
+            <!-- m dw -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="30 1 -15"  scale="0.0080 0.0080 0.0080" gps-entity-place="latitude: 49.162526; longitude: -122.609065;" animation-mixer></a-entity>  
+            <a-box color="blue" position="-4 4 -22" gps-entity-place="latitude: 49.162526; longitude: -122.609065;" scale="3 3 3" animation-mixer></a-box>
+            <!-- m lr -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="10 0 0"   position="0 0 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="latitude: 49.162451; longitude: -122.609349;" animation-mixer></a-entity>  
+            <a-box color="red" position="4 -2 -15" gps-entity-place="latitude: 49.162451; longitude: -122.609349;" scale="3 3 3" animation-mixer></a-box>
+            <!-- bus stop -->
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 -1 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="latitude: 49.26198814493848; longitude: -123.03712070791485;" animation-mixer></a-entity> 
+            <!-- b -->
+            <a-entity id="treasure" gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="-5 0 -5"  scale="0.0030 0.0030 0.0030" 
+            gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;" animation-mixer></a-entity>  
+            <a-box color="pink" position="4 -1 -15" gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;"scale="3 3 3" animation-mixer></a-box>
+            <!-- Marker models -->
+            <a-marker type='barcode' value='1'>
+              <a-entity rotation="0 0 0"  position="0 0 0" scale="1.35 1.35 1.35">
+                  <a-sphere id="sphere" position="0 0 0" color="purple"></a-sphere>
+              </a-entity>
+            </a-marker>
+            <a-marker type='barcode' value='2'>
+              <a-entity rotation="0 0 0" position="0 0 0" scale="1.35 1.35 1.35">
+                  <a-box id="box" position="0 0 0" color="skyblue"></a-box>
+              </a-entity>
+            </a-marker>
+            <a-marker type='barcode' value='3'>
+              <a-entity rotation="0 0 0" position="0 0 0" scale="1.35 1.35 1.35">
+                  <a-sphere id="sphere" position="0 0 0" color="yellow"></a-sphere>
+              </a-entity>
+            </a-marker>
+            <a-marker type='barcode' value='4'>
+              <a-entity rotation="0 0 0" position="0 0 1" scale="1.35 1.35 1.35">
+                  <a-box id="box" position="0 0 0" color="green"></a-box>
+              </a-entity>
+            </a-marker>
+            <a-marker type='barcode' value='5'>
+              <a-entity rotation="0 45 0" position="0 0 0" scale="1.35 1.35 1.35">
+                  <a-box id="box" position="0 0 0" color="orange"></a-box>
+              </a-entity>
+            </a-marker>
+            <a-marker type='barcode' value='6'>
+              <a-entity rotation="0 0 0" position="0 0 0" scale="1.35 1.35 1.35">
+                  <a-sphere id="sphere" position="0 0 0" color="red"></a-sphere>
+              </a-entity>
+            </a-marker>
+            <a-marker type='barcode' value='7'>
+              <a-entity rotation="0 0 0" position="0 0 0" scale="1.35 1.35 1.35">
+                  <a-box id="box" position="0 0 0" color="blue"></a-box>
+              </a-entity>
+            </a-marker>
+            <a-marker type='pattern' url='https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/markertest/pattern-marker.patt'>
+              <a-entity rotation="45 45 45" position="0 0 0" scale="1.6 1.6 1.6">
+                  <a-box id="box" position="0 0 0" color="black"></a-box>
+              </a-entity>
+            </a-marker>
+            <a-marker type='pattern' url='https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/markertest/pattern-CK-red.patt'>
+              <a-entity rotation="45 45 45" position="0 0 0" scale="1.6 1.6 1.6">
+                  <a-box id="box" position="0 0 0" color="white"></a-box>
+              </a-entity>
+            </a-marker>
+
+        </a-scene>
+
+    </body>
+
+</html>
