@@ -117,22 +117,22 @@ Colors.random = function() {
           <!-- GPS models -->
           <a-scene embedded vr-mode-ui="enabled: false" arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
             <!-- simulateLatitude="49.2694464" simulateLongitude="-123.0598674" -->
-            <a-camera gps-camera rotation-reader position="0 0 -10"></a-camera>
+            <a-camera gps-camera position="0 0 0"></a-camera>
             <!-- ck langley -->
-            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="1 0 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="latitude: 49.16275788178612; longitude: -122.63911809729908;" animation-mixer></a-entity> 
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="1 0 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="latitude: 49.16275788178612; longitude: -122.63911809729908;" ></a-entity> 
             <!-- m dw -->
-            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="30 1 -15"  scale="0.0080 0.0080 0.0080" gps-entity-place="latitude: 49.162526; longitude: -122.609065;" animation-mixer></a-entity>  
-            <a-box color="blue" position="-4 4 -22" gps-entity-place="latitude: 49.162526; longitude: -122.609065;" scale="3 3 3" animation-mixer></a-box>
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="30 1 -15"  scale="0.0080 0.0080 0.0080" gps-entity-place="latitude: 49.162526; longitude: -122.609065;" ></a-entity>  
+            <a-box color="blue" position="-4 4 -22" gps-entity-place="latitude: 49.162526; longitude: -122.609065;" scale="3 3 3" ></a-box>
             <!-- m lr -->
-            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="10 0 0"   position="0 0 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="latitude: 49.162451; longitude: -122.609349;" animation-mixer></a-entity>  
-            <a-box color="red" position="4 -2 -15" gps-entity-place="latitude: 49.162451; longitude: -122.609349;" scale="3 3 3" animation-mixer></a-box>
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="10 0 0"   position="0 0 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="latitude: 49.162451; longitude: -122.609349;" ></a-entity>  
+            <a-box color="red" position="4 -2 -15" gps-entity-place="latitude: 49.162451; longitude: -122.609349;" scale="3 3 3" ></a-box>
             <!-- bus stop -->
-            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 -1 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="latitude: 49.26198814493848; longitude: -123.03712070791485;" animation-mixer></a-entity> 
+            <a-entity gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="0 -1 -5"  scale="0.0020 0.0020 0.0020" gps-entity-place="latitude: 49.26198814493848; longitude: -123.03712070791485;" ></a-entity> 
             <!-- b -->
             <a-entity id="treasure" gltf-model="https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/ar-scan/models/animated-treasure/ar_treasure_chest_0513b.gltf" rotation="0 0 0"   position="-5 0 -5"  scale="0.0030 0.0030 0.0030" 
-            gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;" animation-mixer></a-entity>  
-            <a-box color="pink" position="4 -1 -15" gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;"scale="5 5 5" animation-mixer></a-box>
-            <a-box color="red" position="4 -1 15" gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;"scale="5 5 5" animation-mixer></a-box>
+            gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;" ></a-entity>  
+            <a-box color="pink" position="4 -1 -15" gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;"scale="5 5 5" ></a-box>
+            <a-box color="red" position="4 -1 15" gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;"scale="5 5 5" ></a-box>
             <!-- Marker models -->
             <a-marker type='barcode' value='1'>
               <a-entity rotation="0 0 0"  position="0 0 0" scale="1.35 1.35 1.35">
@@ -150,8 +150,8 @@ Colors.random = function() {
               </a-entity>
             </a-marker>
             <a-marker type='barcode' value='4'>
-              <a-entity rotation="0 0 0" position="0 0 1" scale="1.35 1.35 1.35">
-                  <a-box id="box" position="0 0 0" color="green"></a-box>
+              <a-entity>
+                  <a-box id="box" color="green"></a-box>
               </a-entity>
             </a-marker>
             <a-marker type='barcode' value='5'>
