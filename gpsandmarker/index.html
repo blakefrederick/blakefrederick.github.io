@@ -105,7 +105,25 @@ Colors.random = function() {
       }, 4000)
 
 
+      AFRAME.registerComponent('markerevents', {
+        init: function () {
+          var marker = this.el;
 
+          console.log("markerevents-init", marker)
+
+          marker.addEventListener('markerFound', function() {
+            var markerId = marker.id;
+            console.log('markerFound', markerId);
+            // TODO: Add your own code here to react to the marker being found.
+          });
+
+          marker.addEventListener('markerLost', function() {
+            var markerId = marker.id;
+            console.log('markerLost', markerId);
+            // TODO: Add your own code here to react to the marker being lost.
+          });
+        }
+      })
       </script>
 
 <style>
@@ -134,47 +152,47 @@ Colors.random = function() {
             <a-box color="pink" position="4 -1 -15" gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;"scale="5 5 5" ></a-box>
             <a-box color="red" position="4 -1 15" gps-entity-place="latitude: 49.26938578732097; longitude: -123.06009408487078;"scale="5 5 5" ></a-box>
             <!-- Marker models -->
-            <a-marker type='barcode' value='1'>
+            <a-marker type='barcode' value='1' markerevents>
               <a-entity rotation="0 0 0"  position="0 0 0" scale="1.35 1.35 1.35">
                   <a-sphere id="sphere" position="0 0 0" color="purple"></a-sphere>
               </a-entity>
             </a-marker>
-            <a-marker type='barcode' value='2'>
-              <a-entity rotation="0 0 0" position="0 0 0" scale="1.35 1.35 1.35">
-                  <a-box id="box" position="0 0 0" color="skyblue"></a-box>
+            <a-marker type='barcode' id="barcode-2" value='2' markerevents>
+              <a-entity rotation="0 0 0" position="0 0 0" scale="1.35 1.35 1.35" markerevents>
+                  <a-box id="box" color="skyblue"></a-box>
               </a-entity>
             </a-marker>
-            <a-marker type='barcode' value='3'>
+            <a-marker type='barcode' value='3' markerevents>
               <a-entity rotation="0 0 0" position="0 0 0" scale="1.35 1.35 1.35">
                   <a-sphere id="sphere" position="0 0 0" color="yellow"></a-sphere>
               </a-entity>
             </a-marker>
-            <a-marker type='barcode' value='4'>
-              <a-entity>
+            <a-marker type='barcode' id="barcode-4" value='4' >
+              <a-entity markerevents>
                   <a-box id="box" color="green"></a-box>
               </a-entity>
             </a-marker>
-            <a-marker type='barcode' value='5'>
+            <a-marker type='barcode' value='5' markerevents>
               <a-entity rotation="0 45 0" position="0 0 0" scale="1.35 1.35 1.35">
                   <a-box id="box" position="0 0 0" color="orange"></a-box>
               </a-entity>
             </a-marker>
-            <a-marker type='barcode' value='6'>
+            <a-marker type='barcode' value='6' markerevents>
               <a-entity rotation="0 0 0" position="0 0 0" scale="1.35 1.35 1.35">
-                  <a-sphere id="sphere" position="0 0 0" color="red"></a-sphere>
+                  <a-sphere id="sphere" color="red"></a-sphere>
               </a-entity>
             </a-marker>
-            <a-marker type='barcode' value='7'>
+            <a-marker type='barcode' value='7' markerevents>
               <a-entity rotation="0 0 0" position="0 0 0" scale="1.35 1.35 1.35">
                   <a-box id="box" position="0 0 0" color="blue"></a-box>
               </a-entity>
             </a-marker>
-            <a-marker type='pattern' url='https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/markertest/pattern-marker.patt'>
+            <a-marker type='pattern' url='https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/markertest/pattern-marker.patt' markerevents>
               <a-entity rotation="45 45 45" position="0 0 0" scale="1.6 1.6 1.6">
                   <a-box id="box" position="0 0 0" color="black"></a-box>
               </a-entity>
             </a-marker>
-            <a-marker type='pattern' url='https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/markertest/pattern-CK-red.patt'>
+            <a-marker type='pattern' url='https://raw.githubusercontent.com/blakefrederick/blakefrederick.github.io/master/markertest/pattern-CK-red.patt' markerevents>
               <a-entity rotation="45 45 45" position="0 0 0" scale="1.6 1.6 1.6">
                   <a-box id="box" position="0 0 0" color="white"></a-box>
               </a-entity>
