@@ -43,7 +43,7 @@
 
         
 
-          // document.getElementById('camera').append(el);
+          // document.getElementById('body').append(el);
           // Highlight the cursor while focussing
           el.setAttribute('color', 'yellow');
           document.getElementById('cursor').setAttribute('color', 'yellow')
@@ -59,7 +59,11 @@
           numCollected++
           
           // // Animate 
-          // el.setAttribute('animation__position', "property: position; to: 0 0 -15; dur: 500; delay: 333; easing: linear; loop: false")
+          el.setAttribute('animation__position', "property: position; to: 0 -2 -22; dur: 1000; delay: 333; easing: linear; loop: false")
+          el.setAttribute('animation__rotation', "property: rotation; from: 0 360 0 to: 360 360 360; dur: 2000; delay: 0; easing: linear; loop: true")
+          setTimeout(() => {
+            el.setAttribute('animation__position', "property: position; to: 0 -200 -22; dur: 3000; delay: 0; easing: linear; loop: false")
+          }, 4000)
 
         }
 
@@ -155,7 +159,7 @@
 
 </style>
 </head>
-<body>
+<body id="body">
   <a-scene wasd-controls embedded vr-mode-ui="enabled: false" renderer="antialias: true; logarithmicDepthBuffer: true; alpha: true; colorManagement: true;">
     <a-text id="developedBy" value="Developed by" position="0 8 45" rotation="0 180 0" height="45px" width="35px" color="white"></a-text>
     <a-text id="turn" value="Turn around" position="-5 -1 45" rotation="0 180 0" height="85px" width="50px" color="white" visible="true"></a-text>
