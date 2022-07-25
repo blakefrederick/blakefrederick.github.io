@@ -1,46 +1,47 @@
 const carCanvas=document.getElementById("carCanvas");
-carCanvas.width=600;
+carCanvas.width=400;
 const networkCanvas=document.getElementById("networkCanvas");
-networkCanvas.width=650;
+networkCanvas.width=450;
 
 const carCtx = carCanvas.getContext("2d");
 const networkCtx = networkCanvas.getContext("2d");
 
 const road=new Road(carCanvas.width/2,carCanvas.width*0.9);
 
-const N=20;
+const N=555;
 const cars=generateCars(N);
 let bestCar=cars[0];
-if(localStorage.getItem("bestBrain")){
-    for(let i=0;i<cars.length;i++){
+for(let i=0;i<cars.length;i++){
+    if (i % 2 === 0 && localStorage.getItem("bestBrain")) {
         cars[i].brain=JSON.parse(localStorage.getItem("bestBrain"));
-        // cars[i].brain=defaultBrain;
-        if(i!=0) {
-            NeuralNetwork.mutate(cars[i].brain,0.1);
-        }
     }
-    cars[4].brain=defaultBrain;
+    else {
+        cars[i].brain=Math.round(Math.random()) ? defaultBrain : defaultBrain2;
+    }
+    if(i!=0) {
+        NeuralNetwork.mutate(cars[i].brain,Math.random() - 0.5);
+    }
 }
 
 const traffic=[
     new Car(road.getLaneCenter(2),-500,30,50,"DUMMY",7,getRandomColor()),
     new Car(road.getLaneCenter(1),-700,30,50,"DUMMY",8,getRandomColor()),
-    new Car(road.getLaneCenter(Math.random() * 8),-100,30,50,"AI",Math.random() *  7 + 2,'black'),
-    new Car(road.getLaneCenter(Math.random() * 8),-200,30,50,"AI",Math.random() *  7 + 2,'black'),
-    new Car(road.getLaneCenter(Math.random() * 8),-300,30,50,"AI",Math.random() *  7 + 2,'black'),
-    new Car(road.getLaneCenter(Math.random() * 8),-400,30,50,"AI",Math.random() *  7 + 2,'black'),
-    new Car(road.getLaneCenter(Math.random() * 18),-500,30,50,"AI",Math.random() *  7 + 6,'black'),
-    new Car(road.getLaneCenter(Math.random() * 18),-700,30,50,"AI",Math.random() *  8 + 4,'black'),
-    new Car(road.getLaneCenter(Math.random() * 18),-800,30,50,"AI",Math.random() *  9 + 4,'black'),
-    new Car(road.getLaneCenter(Math.random() * 18),-900,30,50,"AI",Math.random() *  12 + 4,'black'),
-    new Car(road.getLaneCenter(Math.random() * 8),-100,30,50,"AI",Math.random() *  7 + 2,'black'),
-    new Car(road.getLaneCenter(Math.random() * 8),-200,30,50,"AI",Math.random() *  7 + 2,'black'),
-    new Car(road.getLaneCenter(Math.random() * 8),-300,30,50,"AI",Math.random() *  7 + 2,'black'),
-    new Car(road.getLaneCenter(Math.random() * 8),-400,30,50,"AI",Math.random() *  7 + 2,'black'),
-    new Car(road.getLaneCenter(Math.random() * 18),-500,30,50,"AI",Math.random() *  7 + 6,'black'),
-    new Car(road.getLaneCenter(Math.random() * 18),-700,30,50,"AI",Math.random() *  8 + 4,'black'),
-    new Car(road.getLaneCenter(Math.random() * 18),-800,30,50,"AI",Math.random() *  9 + 4,'black'),
-    new Car(road.getLaneCenter(Math.random() * 18),-900,30,50,"AI",Math.random() *  12 + 4,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 8),-100,30,50,"AI",Math.random() *  7 + 2,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 8),-200,30,50,"AI",Math.random() *  7 + 2,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 8),-300,30,50,"AI",Math.random() *  7 + 2,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 8),-400,30,50,"AI",Math.random() *  7 + 2,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 18),-500,30,50,"AI",Math.random() *  7 + 6,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 18),-700,30,50,"AI",Math.random() *  8 + 4,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 18),-800,30,50,"AI",Math.random() *  9 + 4,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 18),-900,30,50,"AI",Math.random() *  12 + 4,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 8),-100,30,50,"AI",Math.random() *  7 + 2,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 8),-200,30,50,"AI",Math.random() *  7 + 2,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 8),-300,30,50,"AI",Math.random() *  7 + 2,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 8),-400,30,50,"AI",Math.random() *  7 + 2,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 18),-500,30,50,"AI",Math.random() *  7 + 6,'black'),
+    // new Car(road.getLaneCenter(Math.random() * 18),-700,30,50,"AI",Math.random() *  8 + 4,'white'),
+    // new Car(road.getLaneCenter(Math.random() * 18),-800,30,50,"AI",Math.random() *  9 + 4,'black'),
+    new Car(road.getLaneCenter(Math.random() * 18),-900,30,50,"AI",Math.random() *  12 + 4,'white'),
     new Car(road.getLaneCenter(Math.random() * 8),-1000,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
     new Car(road.getLaneCenter(Math.random() * 8),-1100,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
     new Car(road.getLaneCenter(Math.random() * 8),-1200,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
@@ -64,10 +65,9 @@ const traffic=[
 
 // Give traffic a brain
 for(let i=0;i<traffic.length;i++){
-    traffic[i].brain=JSON.parse(
-        localStorage.getItem("bestBrain"));
+    traffic[i].brain=Math.round(Math.random()) ? defaultBrain2 : defaultBrain3;
     if(i!=0) {
-        NeuralNetwork.mutate(traffic[i].brain,0.05);
+        NeuralNetwork.mutate(traffic[i].brain,Math.random());
     }
 }
 
