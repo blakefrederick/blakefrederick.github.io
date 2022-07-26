@@ -8,7 +8,7 @@ const networkCtx = networkCanvas.getContext("2d");
 
 const road=new Road(carCanvas.width/2,carCanvas.width*0.9);
 
-const N=555;
+const N=250;
 const cars=generateCars(N);
 let bestCar=cars[0];
 for(let i=0;i<cars.length;i++){
@@ -19,7 +19,7 @@ for(let i=0;i<cars.length;i++){
         cars[i].brain=Math.round(Math.random()) ? defaultBrain : defaultBrain2;
     }
     if(i!=0) {
-        NeuralNetwork.mutate(cars[i].brain,Math.random() - 0.5);
+        NeuralNetwork.mutate(cars[i].brain,0.005*i);
     }
 }
 
@@ -61,6 +61,22 @@ const traffic=[
     new Car(road.getLaneCenter(Math.random() * 8),-1800 * 2,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
     new Car(road.getLaneCenter(Math.random() * 8),-1900 * 2,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
     new Car(road.getLaneCenter(Math.random() * 8),-2000 * 2,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1300 * 3,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1400 * 3,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1500 * 3,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1600 * 3,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1700 * 3,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1800 * 3,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1900 * 3,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-2000 * 3,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1300 * 4,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1400 * 4,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1500 * 4,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1600 * 4,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1700 * 5,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1800 * 5,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-1900 * 5,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
+    new Car(road.getLaneCenter(Math.random() * 8),-2000 * 5,30,50,"DUMMY",Math.random() *  7 + 2,getRandomColor()),
 ];
 
 // Give traffic a brain

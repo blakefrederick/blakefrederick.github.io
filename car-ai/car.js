@@ -1,14 +1,14 @@
 class Car{
-    constructor(x,y,width,height,controlType,maxSpeed=12,color="blue"){
+    constructor(x,y,width,height,controlType,maxSpeed=16,color="blue"){
         this.x=x;
         this.y=y;
         this.width=width;
         this.height=height;
 
         this.speed=0;
-        this.acceleration=getRandomFloat(0.15,0.8);
+        this.acceleration=0.8;
         this.maxSpeed=maxSpeed;
-        this.friction=0.05;
+        this.friction=0.02;
         this.angle=0;
         this.damaged=false;
 
