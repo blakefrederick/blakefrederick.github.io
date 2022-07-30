@@ -66,5 +66,25 @@ class Controls{
                     break;  
             }
         }
+        document.ontouchend=(event)=>{
+            switch(event.target.id){
+                case "left":
+                    this.forward=false;
+                    this.left=false;
+                    break;
+                case "right":
+                    this.forward=false;
+                    this.right=false;
+                    break;
+                case "forward":
+                    this.reverse=false;
+                    this.forward=true;
+                    break;
+                case "reverse":
+                    this.forward=false;
+                    this.reverse=true;
+                    break;  
+            }
+        }
     }
 }
