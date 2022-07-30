@@ -48,5 +48,23 @@ class Controls{
                     break;
             }
         }
+        document.ontouchstart=(event)=>{
+            switch(event.target.id){
+                case "left":
+                    this.forward=true;
+                    this.left=true;
+                    break;
+                case "right":
+                    this.forward=true;
+                    this.right=true;
+                    break;
+                case "forward":
+                    this.forward=true;
+                    break;
+                case "reverse":
+                    this.reverse=true;
+                    break;  
+            }
+        }
     }
 }
